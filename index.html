@@ -1080,10 +1080,10 @@
             <Header />
             <main className="vkn-main">
               <Switch>
-                <Route exact path="/klar-apps/" component={Home} />
-                <Route path="/klar-apps/behandlingar" component={Treatments} />
-                <Route path="/klar-apps/om-oss" component={About} />
-                <Route path="/klar-apps/kontakt" component={Contact} />
+                <Route exact path="/" component={Home} />
+                <Route path="/behandlingar" component={Treatments} />
+                <Route path="/om-oss" component={About} />
+                <Route path="/kontakt" component={Contact} />
                 <Route component={NotFound} />
               </Switch>
             </main>
