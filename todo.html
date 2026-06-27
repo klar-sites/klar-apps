@@ -187,6 +187,64 @@
       transition: color var(--todo-mono-9q8-motion-slow) ease;
     }
 
+    .todo-mono-9q8-auth-area {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      min-width: 0;
+      padding-top: 1px;
+    }
+
+    .todo-mono-9q8-auth-name {
+      max-width: 142px;
+      overflow: hidden;
+      color: var(--todo-mono-9q8-muted-text);
+      font-size: 0.78rem;
+      font-weight: 750;
+      line-height: 1.25;
+      text-align: right;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: color var(--todo-mono-9q8-motion-slow) ease;
+    }
+
+    .todo-mono-9q8-auth-button {
+      min-height: 32px;
+      border: 1px solid var(--todo-mono-9q8-task-border);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--todo-mono-9q8-action-text);
+      padding: 6px 11px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition:
+        background-color var(--todo-mono-9q8-motion-fast) ease,
+        border-color var(--todo-mono-9q8-motion-fast) ease,
+        color var(--todo-mono-9q8-motion-fast) ease,
+        opacity var(--todo-mono-9q8-motion-fast) ease,
+        transform var(--todo-mono-9q8-motion-fast) ease;
+    }
+
+    .todo-mono-9q8-auth-button:hover:not(:disabled) {
+      border-color: var(--todo-mono-9q8-task-border-hover);
+      background: var(--todo-mono-9q8-empty-bg);
+      color: var(--todo-mono-9q8-action-text-hover);
+      transform: translateY(-1px);
+    }
+
+    .todo-mono-9q8-auth-button:disabled {
+      cursor: wait;
+      opacity: 0.58;
+    }
+
+    .todo-mono-9q8-auth-button:focus-visible {
+      outline: 3px solid var(--todo-mono-9q8-focus-ring);
+      outline-offset: 3px;
+    }
+
     .todo-mono-9q8-theme-toggle {
       position: absolute;
       top: clamp(18px, 2.5vw, 30px);
@@ -734,6 +792,17 @@
       themeChoice: "todo-mono-9q8-theme-choice"
     };
 
+    let todoMono9q8KlarUserClientPromise = null;
+
+    function todoMono9q8GetKlarUserClient() {
+      if (!todoMono9q8KlarUserClientPromise) {
+        todoMono9q8KlarUserClientPromise = import("https://editor.klar.website/sdk/v1/users.js")
+          .then(({ createKlarUser }) => createKlarUser({ projectId: 474 }));
+      }
+
+      return todoMono9q8KlarUserClientPromise;
+    }
+
     const todoMono9q8SeedTasks = [
       { id: "todo-mono-9q8-seed-1", text: "This is an example of task #1", completed: true },
       { id: "todo-mono-9q8-seed-2", text: "This is an example of task #2", completed: false },
@@ -995,6 +1064,8 @@
       const [todoMono9q8ExitingIds, setTodoMono9q8ExitingIds] = useState(() => new Set());
       const [todoMono9q8ThemeChoice, setTodoMono9q8ThemeChoice] = useState(todoMono9q8LoadThemeChoice);
       const [todoMono9q8SystemTheme, setTodoMono9q8SystemTheme] = useState(todoMono9q8GetSystemTheme);
+      const [todoMono9q8AuthUser, setTodoMono9q8AuthUser] = useState(null);
+      const [todoMono9q8AuthLoading, setTodoMono9q8AuthLoading] = useState(true);
       const todoMono9q8InputRef = useRef(null);
 
       const todoMono9q8Quote = useMemo(() => {
@@ -1013,6 +1084,50 @@
       const todoMono9q8HasCompletedTasks = useMemo(() => (
         todoMono9q8Tasks.some((todoMono9q8Task) => todoMono9q8Task.completed)
       ), [todoMono9q8Tasks]);
+
+      const todoMono9q8AuthName = useMemo(() => {
+        if (!todoMono9q8AuthUser) return "";
+        return todoMono9q8AuthUser.name ||
+          todoMono9q8AuthUser.displayName ||
+          todoMono9q8AuthUser.email ||
+          "Signed in";
+      }, [todoMono9q8AuthUser]);
+
+      useEffect(() => {
+        let todoMono9q8IsMounted = true;
+        let todoMono9q8Unsubscribe = null;
+
+        todoMono9q8GetKlarUserClient()
+          .then(async (todoMono9q8UserClient) => {
+            if (!todoMono9q8IsMounted) return;
+
+            if (typeof todoMono9q8UserClient.onChange === "function") {
+              todoMono9q8Unsubscribe = todoMono9q8UserClient.onChange((todoMono9q8NextUser) => {
+                if (!todoMono9q8IsMounted) return;
+                setTodoMono9q8AuthUser(todoMono9q8NextUser || null);
+                setTodoMono9q8AuthLoading(false);
+              });
+            }
+
+            const todoMono9q8CurrentUser = await todoMono9q8UserClient.getUser();
+            if (!todoMono9q8IsMounted) return;
+            setTodoMono9q8AuthUser(todoMono9q8CurrentUser || null);
+            setTodoMono9q8AuthLoading(false);
+          })
+          .catch((todoMono9q8Error) => {
+            console.warn("Could not initialize login.", todoMono9q8Error);
+            if (todoMono9q8IsMounted) {
+              setTodoMono9q8AuthLoading(false);
+            }
+          });
+
+        return () => {
+          todoMono9q8IsMounted = false;
+          if (typeof todoMono9q8Unsubscribe === "function") {
+            todoMono9q8Unsubscribe();
+          }
+        };
+      }, []);
 
       useEffect(() => {
         try {
@@ -1152,6 +1267,35 @@
         }
       }, [todoMono9q8ResolvedTheme]);
 
+      const todoMono9q8SignIn = useCallback(async () => {
+        setTodoMono9q8AuthLoading(true);
+
+        try {
+          const todoMono9q8UserClient = await todoMono9q8GetKlarUserClient();
+          const todoMono9q8NextUser = await todoMono9q8UserClient.signIn();
+          const todoMono9q8CurrentUser = todoMono9q8NextUser || await todoMono9q8UserClient.getUser();
+          setTodoMono9q8AuthUser(todoMono9q8CurrentUser || null);
+        } catch (todoMono9q8Error) {
+          console.warn("Could not sign in.", todoMono9q8Error);
+        } finally {
+          setTodoMono9q8AuthLoading(false);
+        }
+      }, []);
+
+      const todoMono9q8SignOut = useCallback(async () => {
+        setTodoMono9q8AuthLoading(true);
+
+        try {
+          const todoMono9q8UserClient = await todoMono9q8GetKlarUserClient();
+          await todoMono9q8UserClient.signOut();
+          setTodoMono9q8AuthUser(null);
+        } catch (todoMono9q8Error) {
+          console.warn("Could not sign out.", todoMono9q8Error);
+        } finally {
+          setTodoMono9q8AuthLoading(false);
+        }
+      }, []);
+
       const todoMono9q8HandleFormSubmit = useCallback((todoMono9q8Event) => {
         todoMono9q8Event.preventDefault();
         todoMono9q8AddTask();
@@ -1173,6 +1317,36 @@
             <div className="todo-mono-9q8-panel">
               <div className="todo-mono-9q8-topbar">
                 <h1 id="todo-mono-9q8-title" className="todo-mono-9q8-heading">Your To Do</h1>
+
+                <div className="todo-mono-9q8-auth-area">
+                  {todoMono9q8AuthUser ? (
+                    <React.Fragment>
+                      <span
+                        className="todo-mono-9q8-auth-name"
+                        title={todoMono9q8AuthUser.email || todoMono9q8AuthName}
+                      >
+                        {todoMono9q8AuthName}
+                      </span>
+                      <button
+                        type="button"
+                        className="todo-mono-9q8-auth-button"
+                        disabled={todoMono9q8AuthLoading}
+                        onClick={todoMono9q8SignOut}
+                      >
+                        Sign out
+                      </button>
+                    </React.Fragment>
+                  ) : (
+                    <button
+                      type="button"
+                      className="todo-mono-9q8-auth-button"
+                      disabled={todoMono9q8AuthLoading}
+                      onClick={todoMono9q8SignIn}
+                    >
+                      {todoMono9q8AuthLoading ? "Checking…" : "Sign in"}
+                    </button>
+                  )}
+                </div>
               </div>
 
               <form className="todo-mono-9q8-entry-form" onSubmit={todoMono9q8HandleFormSubmit}>
