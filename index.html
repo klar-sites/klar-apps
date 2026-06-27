@@ -240,7 +240,7 @@
   <div id="vkn-root"></div>
 
   <script type="text/babel" data-presets="env,react">
-    const { HashRouter, Switch, Route, NavLink, Link, useLocation, Redirect } = ReactRouterDOM;
+    const { BrowserRouter, Switch, Route, NavLink, Link, useLocation, Redirect } = ReactRouterDOM;
     const { useState, useEffect } = React;
 
     const TREATMENTS = [
@@ -564,7 +564,7 @@
 
     function App() {
       return (
-        <HashRouter>
+        <BrowserRouter>
           <ScrollTop />
           <div className="vkn-app">
             <Header />
@@ -579,7 +579,7 @@
             </main>
             <Footer />
           </div>
-        </HashRouter>
+        </BrowserRouter>
       );
     }
 
