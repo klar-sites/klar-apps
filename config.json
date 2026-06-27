@@ -5,7 +5,8 @@
       "name": "behandlingar.html",
       "editableElements": ".vkn-page-head h1:field(title:Titel, name:title, type:string, section:hero),\n.vkn-page-head p:field(title:Beskrivning, name:description, type:text, section:hero),\n\n.vkn-treatments      :field(title:Treatments, name:treatments, type:array, section: Treatments, options(layout:list)),",
       "content": {
-        "title": "Behandlingar 1"
+        "title": "Behandlingar ",
+        "description": "Ett brett utbud av medicinska tjänster utförda av legitimerad personal. ss"
       }
     },
     {
