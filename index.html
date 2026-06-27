@@ -240,8 +240,10 @@
   <div id="vkn-root"></div>
 
   <script type="text/babel" data-presets="env,react">
-    const { BrowserRouter, Switch, Route, NavLink, Link, useLocation, Redirect } = ReactRouterDOM;
+    const { BrowserRouter, MemoryRouter, Switch, Route, NavLink, Link, useLocation, Redirect } = ReactRouterDOM;
     const { useState, useEffect } = React;
+
+    const Router = window.__KLAR_CDN ? MemoryRouter : BrowserRouter;
 
     const TREATMENTS = [
       { id: 'halsoundersokning', title: 'Hälsoundersökning', img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80', alt: 'Läkare som undersöker en patient', desc: 'Grundlig genomgång av din hälsa med blodprov, EKG och personlig rådgivning.', price: 'Från 1 290 kr', time: '60 min' },
@@ -564,7 +566,7 @@
 
     function App() {
       return (
-        <BrowserRouter>
+        <Router>
           <ScrollTop />
           <div className="vkn-app">
             <Header />
@@ -579,7 +581,7 @@
             </main>
             <Footer />
           </div>
-        </BrowserRouter>
+        </Router>
       );
     }
 
