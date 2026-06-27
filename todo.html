@@ -800,7 +800,7 @@
 
     function todoMono9q8GetKlarUserClient() {
       if (!todoMono9q8KlarUserClientPromise) {
-        todoMono9q8KlarUserClientPromise = import("http://localhost:5173/sdk/v1/users.js")
+        todoMono9q8KlarUserClientPromise = import("https://editor.klar.website/sdk/v1/users.js")
           .then(({ createKlarUser }) => createKlarUser({ projectId: 474 }));
       }
 
@@ -1071,6 +1071,8 @@
       const [todoMono9q8AuthUser, setTodoMono9q8AuthUser] = useState(null);
       const [todoMono9q8AuthLoading, setTodoMono9q8AuthLoading] = useState(true);
       const todoMono9q8InputRef = useRef(null);
+      const todoMono9q8SkipSaveRef = useRef(false);
+      const todoMono9q8TasksRef = useRef(todoMono9q8Tasks);
 
       const todoMono9q8Quote = useMemo(() => {
         const todoMono9q8Index = Math.floor(Math.random() * todoMono9q8Quotes.length);
@@ -1134,19 +1136,84 @@
       }, []);
 
       useEffect(() => {
-        try {
-          window.localStorage.setItem(
-            todoMono9q8StorageKeys.tasks,
-            JSON.stringify(todoMono9q8Tasks.map((todoMono9q8Task) => ({
-              id: todoMono9q8Task.id,
-              text: todoMono9q8Task.text,
-              completed: todoMono9q8Task.completed
-            })))
-          );
-        } catch (todoMono9q8Error) {
-          console.warn("Could not save tasks.", todoMono9q8Error);
-        }
+        todoMono9q8TasksRef.current = todoMono9q8Tasks;
       }, [todoMono9q8Tasks]);
+
+      useEffect(() => {
+        if (todoMono9q8AuthLoading) return;
+
+        todoMono9q8SkipSaveRef.current = true;
+
+        if (todoMono9q8AuthUser) {
+          todoMono9q8GetKlarUserClient()
+            .then(async (todoMono9q8UserClient) => {
+              const todoMono9q8DbTasks = await todoMono9q8UserClient.data.get("tasks");
+
+              if (Array.isArray(todoMono9q8DbTasks)) {
+                todoMono9q8SkipSaveRef.current = true;
+                setTodoMono9q8Tasks(
+                  todoMono9q8DbTasks
+                    .filter((todoMono9q8Task) => (
+                      todoMono9q8Task &&
+                      typeof todoMono9q8Task.id === "string" &&
+                      typeof todoMono9q8Task.text === "string"
+                    ))
+                    .map((todoMono9q8Task) => ({
+                      id: todoMono9q8Task.id,
+                      text: todoMono9q8Task.text,
+                      completed: Boolean(todoMono9q8Task.completed)
+                    }))
+                );
+              } else {
+                await todoMono9q8UserClient.data.set(
+                  "tasks",
+                  todoMono9q8TasksRef.current.map((todoMono9q8Task) => ({
+                    id: todoMono9q8Task.id,
+                    text: todoMono9q8Task.text,
+                    completed: todoMono9q8Task.completed
+                  }))
+                );
+              }
+            })
+            .catch((todoMono9q8Error) => {
+              console.warn("Could not load tasks from DB.", todoMono9q8Error);
+            });
+        } else {
+          setTodoMono9q8Tasks(todoMono9q8LoadTasks());
+        }
+      }, [todoMono9q8AuthUser, todoMono9q8AuthLoading]);
+
+      useEffect(() => {
+        if (todoMono9q8SkipSaveRef.current) {
+          todoMono9q8SkipSaveRef.current = false;
+          return;
+        }
+
+        const todoMono9q8SerializedTasks = todoMono9q8Tasks.map((todoMono9q8Task) => ({
+          id: todoMono9q8Task.id,
+          text: todoMono9q8Task.text,
+          completed: todoMono9q8Task.completed
+        }));
+
+        if (todoMono9q8AuthUser) {
+          todoMono9q8GetKlarUserClient()
+            .then((todoMono9q8UserClient) => (
+              todoMono9q8UserClient.data.set("tasks", todoMono9q8SerializedTasks)
+            ))
+            .catch((todoMono9q8Error) => {
+              console.warn("Could not save tasks to DB.", todoMono9q8Error);
+            });
+        } else {
+          try {
+            window.localStorage.setItem(
+              todoMono9q8StorageKeys.tasks,
+              JSON.stringify(todoMono9q8SerializedTasks)
+            );
+          } catch (todoMono9q8Error) {
+            console.warn("Could not save tasks.", todoMono9q8Error);
+          }
+        }
+      }, [todoMono9q8Tasks, todoMono9q8AuthUser]);
 
       useEffect(() => {
         document.documentElement.setAttribute("data-theme", todoMono9q8ResolvedTheme);
