@@ -13,7 +13,8 @@
       "name": "index.html",
       "editableElements": ".vkn-hero__eyebrow            :field(title:Eyebrow, name:eyebrow, type:string, section:Hero),\n.vkn-hero h1                  :field(title:Titel, name:title, type:string),\n.vkn-hero img                 :field(title:Image, name:image, type:image, col:6),\n.vkn-hero p                   :field(title:Text, name:text, type:text, col:6, options(layout:editor)),\n.vkn-hero .vkn-btn--primary   :field(title:Primary button, name:primaryBtn, type:link, col:6),\n.vkn-hero .vkn-btn--ghost     :field(title:Ghost button, name:ghostBtn, type:link, col:6),\n\n.vkn-strip                    :field(title:Strip, name:strip, type:array, section: Strip, options(layout:list)),\n\n.vkn-treatments               :field(title:Treatments, name:treatments, type:array, section: Treatments, options(layout:list)),",
       "content": {
-        "title": "Test"
+        "title": "Din hälsa förtjänar tid och omtanke 1",
+        "eyebrow": "Privatklinik i Stockholm 1"
       }
     },
     {
