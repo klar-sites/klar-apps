@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks — A Beautiful ToDo App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 
     <!-- React + ReactDOM UMD -->
-    <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <script crossorigin="" src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+    <script crossorigin="" src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
     <!-- Babel for JSX -->
     <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
-    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    
 
     <style>
       /* ── Reset & Base ───────────────────────────── */
@@ -644,62 +641,38 @@
   <body>
     <div id="klar-todo-root"></div>
 
-    <script type="text/babel">
-      const { useState, useEffect, useRef, useCallback } = React;
-
-// ── Icons ──────────────────────────────────────
-const IconCheck = () => (
-  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-);
-const IconPlus = () => (
-  <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-);
-const IconEdit = () => (
-  <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-);
-const IconTrash = () => (
-  <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-);
-const IconClipboard = () => (
-  <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
-);
-const IconLogo = () => (
-  <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-);
-
-// ── Storage key ────────────────────────────────
-const STORAGE_KEY = 'klar-todo-app-data-v1';
-
-// ── Greeting based on time ─────────────────────
+    <script>const { useState, useEffect, useRef, useCallback } = React;
+const IconCheck = () => /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 24 24" }, /* @__PURE__ */ React.createElement("polyline", { points: "20 6 9 17 4 12" }));
+const IconPlus = () => /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 24 24" }, /* @__PURE__ */ React.createElement("line", { x1: "12", y1: "5", x2: "12", y2: "19" }), /* @__PURE__ */ React.createElement("line", { x1: "5", y1: "12", x2: "19", y2: "12" }));
+const IconEdit = () => /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 24 24" }, /* @__PURE__ */ React.createElement("path", { d: "M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" }), /* @__PURE__ */ React.createElement("path", { d: "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" }));
+const IconTrash = () => /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 24 24" }, /* @__PURE__ */ React.createElement("polyline", { points: "3 6 5 6 21 6" }), /* @__PURE__ */ React.createElement("path", { d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" }));
+const IconClipboard = () => /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 24 24" }, /* @__PURE__ */ React.createElement("path", { d: "M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" }), /* @__PURE__ */ React.createElement("rect", { x: "9", y: "3", width: "6", height: "4", rx: "1" }));
+const IconLogo = () => /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 24 24" }, /* @__PURE__ */ React.createElement("polyline", { points: "9 11 12 14 22 4" }), /* @__PURE__ */ React.createElement("path", { d: "M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" }));
+const STORAGE_KEY = "klar-todo-app-data-v1";
 function getGreeting() {
-  const h = new Date().getHours();
-  if (h < 5)  return 'Good night';
-  if (h < 12) return 'Good morning';
-  if (h < 17) return 'Good afternoon';
-  if (h < 21) return 'Good evening';
-  return 'Good night';
+  const h = (/* @__PURE__ */ new Date()).getHours();
+  if (h < 5) return "Good night";
+  if (h < 12) return "Good morning";
+  if (h < 17) return "Good afternoon";
+  if (h < 21) return "Good evening";
+  return "Good night";
 }
-
 function getDateString() {
-  return new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'short',
-    day: 'numeric'
+  return (/* @__PURE__ */ new Date()).toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "short",
+    day: "numeric"
   });
 }
-
-// ── Main App ───────────────────────────────────
 function TodoApp() {
   const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
-  const [filter, setFilter] = useState('all');
+  const [input, setInput] = useState("");
+  const [filter, setFilter] = useState("all");
   const [editingId, setEditingId] = useState(null);
-  const [editText, setEditText] = useState('');
-  const [removingIds, setRemovingIds] = useState(new Set());
+  const [editText, setEditText] = useState("");
+  const [removingIds, setRemovingIds] = useState(/* @__PURE__ */ new Set());
   const editInputRef = useRef(null);
   const mainInputRef = useRef(null);
-
-  // Load from localStorage
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -707,36 +680,31 @@ function TodoApp() {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) setTodos(parsed);
       }
-    } catch (e) { /* ignore */ }
+    } catch (e) {
+    }
   }, []);
-
-  // Save to localStorage
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-    } catch (e) { /* ignore */ }
+    } catch (e) {
+    }
   }, [todos]);
-
-  // Focus edit input when editing starts
   useEffect(() => {
     if (editingId && editInputRef.current) {
       editInputRef.current.focus();
       editInputRef.current.select();
     }
   }, [editingId]);
-
-  // Keyboard shortcut: "/" focuses main input
   useEffect(() => {
     const handler = (e) => {
-      if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+      if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
         e.preventDefault();
         mainInputRef.current?.focus();
       }
     };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, []);
-
   const addTodo = useCallback(() => {
     const text = input.trim();
     if (!text) return;
@@ -746,273 +714,221 @@ function TodoApp() {
       done: false,
       createdAt: Date.now()
     };
-    setTodos(prev => [newTodo, ...prev]);
-    setInput('');
+    setTodos((prev) => [newTodo, ...prev]);
+    setInput("");
   }, [input]);
-
   const toggleTodo = useCallback((id) => {
-    setTodos(prev => prev.map(t => t.id === id ? { ...t, done: !t.done } : t));
+    setTodos((prev) => prev.map((t) => t.id === id ? { ...t, done: !t.done } : t));
   }, []);
-
   const deleteTodo = useCallback((id) => {
-    // Animate removal
-    setRemovingIds(prev => new Set(prev).add(id));
+    setRemovingIds((prev) => new Set(prev).add(id));
     setTimeout(() => {
-      setTodos(prev => prev.filter(t => t.id !== id));
-      setRemovingIds(prev => {
+      setTodos((prev) => prev.filter((t) => t.id !== id));
+      setRemovingIds((prev) => {
         const next = new Set(prev);
         next.delete(id);
         return next;
       });
     }, 280);
   }, []);
-
   const startEdit = useCallback((todo) => {
     setEditingId(todo.id);
     setEditText(todo.text);
   }, []);
-
   const saveEdit = useCallback(() => {
     const text = editText.trim();
     if (!text) {
       setEditingId(null);
       return;
     }
-    setTodos(prev => prev.map(t => t.id === editingId ? { ...t, text } : t));
+    setTodos((prev) => prev.map((t) => t.id === editingId ? { ...t, text } : t));
     setEditingId(null);
-    setEditText('');
+    setEditText("");
   }, [editingId, editText]);
-
   const cancelEdit = useCallback(() => {
     setEditingId(null);
-    setEditText('');
+    setEditText("");
   }, []);
-
   const clearCompleted = useCallback(() => {
-    const completed = todos.filter(t => t.done);
+    const completed = todos.filter((t) => t.done);
     if (completed.length === 0) return;
-    // Animate all completed
-    const ids = completed.map(t => t.id);
-    setRemovingIds(prev => {
+    const ids = completed.map((t) => t.id);
+    setRemovingIds((prev) => {
       const next = new Set(prev);
-      ids.forEach(id => next.add(id));
+      ids.forEach((id) => next.add(id));
       return next;
     });
     setTimeout(() => {
-      setTodos(prev => prev.filter(t => !t.done));
-      setRemovingIds(new Set());
+      setTodos((prev) => prev.filter((t) => !t.done));
+      setRemovingIds(/* @__PURE__ */ new Set());
     }, 280);
   }, [todos]);
-
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') { e.preventDefault(); addTodo(); }
-    if (e.key === 'Escape') { setInput(''); }
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addTodo();
+    }
+    if (e.key === "Escape") {
+      setInput("");
+    }
   };
-
   const handleEditKeyDown = (e) => {
-    if (e.key === 'Enter') { e.preventDefault(); saveEdit(); }
-    if (e.key === 'Escape') { e.preventDefault(); cancelEdit(); }
+    if (e.key === "Enter") {
+      e.preventDefault();
+      saveEdit();
+    }
+    if (e.key === "Escape") {
+      e.preventDefault();
+      cancelEdit();
+    }
   };
-
-  // Filtered list
-  const filtered = todos.filter(t => {
-    if (filter === 'active')    return !t.done;
-    if (filter === 'completed') return t.done;
+  const filtered = todos.filter((t) => {
+    if (filter === "active") return !t.done;
+    if (filter === "completed") return t.done;
     return true;
   });
-
-  const total      = todos.length;
-  const doneCount  = todos.filter(t => t.done).length;
-  const activeCount= total - doneCount;
-  const progress   = total === 0 ? 0 : Math.round((doneCount / total) * 100);
-
-  // Determine empty state message
-  let emptyTitle = 'No tasks yet';
-  let emptySub   = 'Add your first task above to get started.';
-  if (filter === 'active' && total > 0) {
-    emptyTitle = 'All done!';
-    emptySub   = 'You\'ve completed everything. Enjoy the moment.';
-  } else if (filter === 'completed' && total > 0) {
-    emptyTitle = 'Nothing completed yet';
-    emptySub   = 'Check off a task to see it here.';
+  const total = todos.length;
+  const doneCount = todos.filter((t) => t.done).length;
+  const activeCount = total - doneCount;
+  const progress = total === 0 ? 0 : Math.round(doneCount / total * 100);
+  let emptyTitle = "No tasks yet";
+  let emptySub = "Add your first task above to get started.";
+  if (filter === "active" && total > 0) {
+    emptyTitle = "All done!";
+    emptySub = "You've completed everything. Enjoy the moment.";
+  } else if (filter === "completed" && total > 0) {
+    emptyTitle = "Nothing completed yet";
+    emptySub = "Check off a task to see it here.";
   }
-
-  return (
-    <div className="klar-todo-app">
-      {/* Header */}
-      <div className="klar-todo-header">
-        <div className="klar-todo-header__brand">
-          <div className="klar-todo-header__logo">
-            <IconLogo />
-          </div>
-          <div className="klar-todo-header__title">Tasks</div>
-        </div>
-        <div className="klar-todo-header__date">{getDateString()}</div>
-      </div>
-
-      {/* Hero */}
-      <div className="klar-todo-hero">
-        <div className="klar-todo-hero__greeting">{getGreeting()} 👋</div>
-        <div className="klar-todo-hero__big">
-          {activeCount === 0 && total > 0
-            ? <>You're all caught up <span>✨</span></>
-            : <>You have <span>{activeCount} {activeCount === 1 ? 'task' : 'tasks'}</span> left</>}
-        </div>
-        <div className="klar-todo-hero__progress">
-          <div
-            className="klar-todo-hero__progress-bar"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Add */}
-      <div className="klar-todo-add">
-        <div className="klar-todo-add__form">
-          <input
-            ref={mainInputRef}
-            type="text"
-            className="klar-todo-add__input"
-            placeholder="Add a new task…  (press / to focus)"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            maxLength={200}
-          />
-          <button
-            className="klar-todo-add__btn"
-            onClick={addTodo}
-            disabled={!input.trim()}
-            aria-label="Add task"
-          >
-            <IconPlus />
-          </button>
-        </div>
-      </div>
-
-      {/* Filters */}
-      <div className="klar-todo-filters">
-        <button
-          className={`klar-todo-filters__tab ${filter === 'all' ? 'klar-todo-filters__tab--active' : ''}`}
-          onClick={() => setFilter('all')}
-        >
-          All <span className="klar-todo-filters__count">{total}</span>
-        </button>
-        <button
-          className={`klar-todo-filters__tab ${filter === 'active' ? 'klar-todo-filters__tab--active' : ''}`}
-          onClick={() => setFilter('active')}
-        >
-          Active <span className="klar-todo-filters__count">{activeCount}</span>
-        </button>
-        <button
-          className={`klar-todo-filters__tab ${filter === 'completed' ? 'klar-todo-filters__tab--active' : ''}`}
-          onClick={() => setFilter('completed')}
-        >
-          Done <span className="klar-todo-filters__count">{doneCount}</span>
-        </button>
-      </div>
-
-      {/* List */}
-      <div className="klar-todo-list">
-        {filtered.length === 0 ? (
-          <div className="klar-todo-empty">
-            <div className="klar-todo-empty__icon">
-              <IconClipboard />
-            </div>
-            <div className="klar-todo-empty__title">{emptyTitle}</div>
-            <div className="klar-todo-empty__sub">{emptySub}</div>
-          </div>
-        ) : (
-          filtered.map(todo => {
-            const isRemoving = removingIds.has(todo.id);
-            const isEditing  = editingId === todo.id;
-            return (
-              <div
-                key={todo.id}
-                className={[
-                  'klar-todo-item',
-                  todo.done ? 'klar-todo-item--done' : '',
-                  isRemoving ? 'klar-todo-item--removing' : ''
-                ].filter(Boolean).join(' ')}
-              >
-                <div
-                  className="klar-todo-item__check"
-                  onClick={() => toggleTodo(todo.id)}
-                  role="checkbox"
-                  aria-checked={todo.done}
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === ' ' || e.key === 'Enter') {
-                      e.preventDefault();
-                      toggleTodo(todo.id);
-                    }
-                  }}
-                >
-                  <IconCheck />
-                </div>
-
-                {isEditing ? (
-                  <input
-                    ref={editInputRef}
-                    className="klar-todo-item__edit"
-                    value={editText}
-                    onChange={(e) => setEditText(e.target.value)}
-                    onKeyDown={handleEditKeyDown}
-                    onBlur={saveEdit}
-                    maxLength={200}
-                  />
-                ) : (
-                  <div
-                    className="klar-todo-item__text"
-                    onDoubleClick={() => startEdit(todo)}
-                  >
-                    {todo.text}
-                  </div>
-                )}
-
-                {!isEditing && (
-                  <div className="klar-todo-item__actions">
-                    <button
-                      className="klar-todo-item__icon-btn"
-                      onClick={() => startEdit(todo)}
-                      aria-label="Edit task"
-                    >
-                      <IconEdit />
-                    </button>
-                    <button
-                      className="klar-todo-item__icon-btn klar-todo-item__icon-btn--delete"
-                      onClick={() => deleteTodo(todo.id)}
-                      aria-label="Delete task"
-                    >
-                      <IconTrash />
-                    </button>
-                  </div>
-                )}
-              </div>
-            );
-          })
-        )}
-      </div>
-
-      {/* Footer */}
-      <div className="klar-todo-footer">
-        <div className="klar-todo-footer__count">
-          <strong>{activeCount}</strong> {activeCount === 1 ? 'task' : 'tasks'} remaining
-        </div>
-        <button
-          className="klar-todo-footer__clear"
-          onClick={clearCompleted}
-          disabled={doneCount === 0}
-        >
-          Clear completed
-        </button>
-      </div>
-    </div>
-  );
+  return /* @__PURE__ */ React.createElement("div", { className: "klar-todo-app" }, /* @__PURE__ */ React.createElement("div", { className: "klar-todo-header" }, /* @__PURE__ */ React.createElement("div", { className: "klar-todo-header__brand" }, /* @__PURE__ */ React.createElement("div", { className: "klar-todo-header__logo" }, /* @__PURE__ */ React.createElement(IconLogo, null)), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-header__title" }, "Tasks")), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-header__date" }, getDateString())), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-hero" }, /* @__PURE__ */ React.createElement("div", { className: "klar-todo-hero__greeting" }, getGreeting(), " \u{1F44B}"), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-hero__big" }, activeCount === 0 && total > 0 ? /* @__PURE__ */ React.createElement(React.Fragment, null, "You're all caught up ", /* @__PURE__ */ React.createElement("span", null, "\u2728")) : /* @__PURE__ */ React.createElement(React.Fragment, null, "You have ", /* @__PURE__ */ React.createElement("span", null, activeCount, " ", activeCount === 1 ? "task" : "tasks"), " left")), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-hero__progress" }, /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      className: "klar-todo-hero__progress-bar",
+      style: { width: `${progress}%` }
+    }
+  ))), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-add" }, /* @__PURE__ */ React.createElement("div", { className: "klar-todo-add__form" }, /* @__PURE__ */ React.createElement(
+    "input",
+    {
+      ref: mainInputRef,
+      type: "text",
+      className: "klar-todo-add__input",
+      placeholder: "Add a new task\u2026  (press / to focus)",
+      value: input,
+      onChange: (e) => setInput(e.target.value),
+      onKeyDown: handleKeyDown,
+      maxLength: 200
+    }
+  ), /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      className: "klar-todo-add__btn",
+      onClick: addTodo,
+      disabled: !input.trim(),
+      "aria-label": "Add task"
+    },
+    /* @__PURE__ */ React.createElement(IconPlus, null)
+  ))), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-filters" }, /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      className: `klar-todo-filters__tab ${filter === "all" ? "klar-todo-filters__tab--active" : ""}`,
+      onClick: () => setFilter("all")
+    },
+    "All ",
+    /* @__PURE__ */ React.createElement("span", { className: "klar-todo-filters__count" }, total)
+  ), /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      className: `klar-todo-filters__tab ${filter === "active" ? "klar-todo-filters__tab--active" : ""}`,
+      onClick: () => setFilter("active")
+    },
+    "Active ",
+    /* @__PURE__ */ React.createElement("span", { className: "klar-todo-filters__count" }, activeCount)
+  ), /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      className: `klar-todo-filters__tab ${filter === "completed" ? "klar-todo-filters__tab--active" : ""}`,
+      onClick: () => setFilter("completed")
+    },
+    "Done ",
+    /* @__PURE__ */ React.createElement("span", { className: "klar-todo-filters__count" }, doneCount)
+  )), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-list" }, filtered.length === 0 ? /* @__PURE__ */ React.createElement("div", { className: "klar-todo-empty" }, /* @__PURE__ */ React.createElement("div", { className: "klar-todo-empty__icon" }, /* @__PURE__ */ React.createElement(IconClipboard, null)), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-empty__title" }, emptyTitle), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-empty__sub" }, emptySub)) : filtered.map((todo) => {
+    const isRemoving = removingIds.has(todo.id);
+    const isEditing = editingId === todo.id;
+    return /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        key: todo.id,
+        className: [
+          "klar-todo-item",
+          todo.done ? "klar-todo-item--done" : "",
+          isRemoving ? "klar-todo-item--removing" : ""
+        ].filter(Boolean).join(" ")
+      },
+      /* @__PURE__ */ React.createElement(
+        "div",
+        {
+          className: "klar-todo-item__check",
+          onClick: () => toggleTodo(todo.id),
+          role: "checkbox",
+          "aria-checked": todo.done,
+          tabIndex: 0,
+          onKeyDown: (e) => {
+            if (e.key === " " || e.key === "Enter") {
+              e.preventDefault();
+              toggleTodo(todo.id);
+            }
+          }
+        },
+        /* @__PURE__ */ React.createElement(IconCheck, null)
+      ),
+      isEditing ? /* @__PURE__ */ React.createElement(
+        "input",
+        {
+          ref: editInputRef,
+          className: "klar-todo-item__edit",
+          value: editText,
+          onChange: (e) => setEditText(e.target.value),
+          onKeyDown: handleEditKeyDown,
+          onBlur: saveEdit,
+          maxLength: 200
+        }
+      ) : /* @__PURE__ */ React.createElement(
+        "div",
+        {
+          className: "klar-todo-item__text",
+          onDoubleClick: () => startEdit(todo)
+        },
+        todo.text
+      ),
+      !isEditing && /* @__PURE__ */ React.createElement("div", { className: "klar-todo-item__actions" }, /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          className: "klar-todo-item__icon-btn",
+          onClick: () => startEdit(todo),
+          "aria-label": "Edit task"
+        },
+        /* @__PURE__ */ React.createElement(IconEdit, null)
+      ), /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          className: "klar-todo-item__icon-btn klar-todo-item__icon-btn--delete",
+          onClick: () => deleteTodo(todo.id),
+          "aria-label": "Delete task"
+        },
+        /* @__PURE__ */ React.createElement(IconTrash, null)
+      ))
+    );
+  })), /* @__PURE__ */ React.createElement("div", { className: "klar-todo-footer" }, /* @__PURE__ */ React.createElement("div", { className: "klar-todo-footer__count" }, /* @__PURE__ */ React.createElement("strong", null, activeCount), " ", activeCount === 1 ? "task" : "tasks", " remaining"), /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      className: "klar-todo-footer__clear",
+      onClick: clearCompleted,
+      disabled: doneCount === 0
+    },
+    "Clear completed"
+  )));
 }
-
-// ── Render ─────────────────────────────────────
-ReactDOM.createRoot(document.getElementById('klar-todo-root')).render(<TodoApp />);
+ReactDOM.createRoot(document.getElementById("klar-todo-root")).render(/* @__PURE__ */ React.createElement(TodoApp, null));
 </script>
-  </body>
-</html>
+  
+</body></html>

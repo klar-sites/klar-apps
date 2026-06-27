@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A polished monochrome React to-do app with light and dark mode." />
+<!DOCTYPE html><html lang="en" data-theme="light"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A polished monochrome React to-do app with light and dark mode.">
     <title>Your To Do</title>
 
     <script>
@@ -31,7 +29,7 @@
 
     <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
+    
 
     <style>
       :root {
@@ -782,706 +780,537 @@
   <body>
     <div id="todo-mono-9q8-root"></div>
 
-    <script type="text/babel" data-type="module">
-      const {
-      useCallback,
-      useEffect,
-      useMemo,
-      useRef,
-      useState
-    } = React;
-
-    const todoMono9q8StorageKeys = {
-      tasks: "todo-mono-9q8-tasks",
-      themeChoice: "todo-mono-9q8-theme-choice"
+    <script type="module">const {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} = React;
+const todoMono9q8StorageKeys = {
+  tasks: "todo-mono-9q8-tasks",
+  themeChoice: "todo-mono-9q8-theme-choice"
+};
+let todoMono9q8KlarUserClientPromise = null;
+function todoMono9q8GetKlarUserClient() {
+  if (!todoMono9q8KlarUserClientPromise) {
+    todoMono9q8KlarUserClientPromise = import("https://editor.klar.website/sdk/v1/users.js").then(({ createKlarUser }) => createKlarUser({ projectId: 474 }));
+  }
+  return todoMono9q8KlarUserClientPromise;
+}
+const todoMono9q8SeedTasks = [
+  { id: "todo-mono-9q8-seed-1", text: "This is an example of task #1", completed: true },
+  { id: "todo-mono-9q8-seed-2", text: "This is an example of task #2", completed: false },
+  { id: "todo-mono-9q8-seed-3", text: "This is an example of task #3", completed: true },
+  { id: "todo-mono-9q8-seed-4", text: "This is an example of task #4", completed: false },
+  { id: "todo-mono-9q8-seed-5", text: "This is an example of task #5", completed: false }
+];
+const todoMono9q8Quotes = [
+  '"Doing what you love is the cornerstone of having abundance in your life." - Wayne Dyer',
+  '"The secret of getting ahead is getting started." - Mark Twain',
+  '"Simplicity boils down to two steps: identify the essential, eliminate the rest." - Leo Babauta',
+  '"Great things are done by a series of small things brought together." - Vincent van Gogh',
+  '"Focus on being productive instead of busy." - Tim Ferriss'
+];
+function todoMono9q8CreateId() {
+  if (window.crypto && typeof window.crypto.randomUUID === "function") {
+    return `todo-mono-9q8-${window.crypto.randomUUID()}`;
+  }
+  return `todo-mono-9q8-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+function todoMono9q8LoadTasks() {
+  try {
+    const todoMono9q8RawTasks = window.localStorage.getItem(todoMono9q8StorageKeys.tasks);
+    if (todoMono9q8RawTasks === null) {
+      return todoMono9q8SeedTasks;
+    }
+    const todoMono9q8ParsedTasks = JSON.parse(todoMono9q8RawTasks);
+    if (!Array.isArray(todoMono9q8ParsedTasks)) {
+      return todoMono9q8SeedTasks;
+    }
+    return todoMono9q8ParsedTasks.filter((todoMono9q8Task) => todoMono9q8Task && typeof todoMono9q8Task.id === "string" && typeof todoMono9q8Task.text === "string").map((todoMono9q8Task) => ({
+      id: todoMono9q8Task.id,
+      text: todoMono9q8Task.text,
+      completed: Boolean(todoMono9q8Task.completed)
+    }));
+  } catch (todoMono9q8Error) {
+    return todoMono9q8SeedTasks;
+  }
+}
+function todoMono9q8LoadThemeChoice() {
+  try {
+    const todoMono9q8StoredChoice = window.localStorage.getItem(todoMono9q8StorageKeys.themeChoice);
+    return todoMono9q8StoredChoice === "light" || todoMono9q8StoredChoice === "dark" ? todoMono9q8StoredChoice : "system";
+  } catch (todoMono9q8Error) {
+    return "system";
+  }
+}
+function todoMono9q8GetSystemTheme() {
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+function TodoMono9q8SunIcon() {
+  return /* @__PURE__ */ React.createElement("svg", { className: "todo-mono-9q8-theme-icon", viewBox: "0 0 24 24", "aria-hidden": "true" }, /* @__PURE__ */ React.createElement(
+    "path",
+    {
+      d: "M12 4.6V2.4M12 21.6v-2.2M4.6 12H2.4M21.6 12h-2.2M6.76 6.76 5.2 5.2M18.8 18.8l-1.56-1.56M17.24 6.76 18.8 5.2M5.2 18.8l1.56-1.56",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.9",
+      strokeLinecap: "round"
+    }
+  ), /* @__PURE__ */ React.createElement(
+    "circle",
+    {
+      cx: "12",
+      cy: "12",
+      r: "4.2",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.9"
+    }
+  ));
+}
+function TodoMono9q8MoonIcon() {
+  return /* @__PURE__ */ React.createElement("svg", { className: "todo-mono-9q8-theme-icon", viewBox: "0 0 24 24", "aria-hidden": "true" }, /* @__PURE__ */ React.createElement(
+    "path",
+    {
+      d: "M20.35 14.28A7.83 7.83 0 0 1 9.72 3.65a8.56 8.56 0 1 0 10.63 10.63Z",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.9",
+      strokeLinejoin: "round"
+    }
+  ));
+}
+function TodoMono9q8PlusIcon() {
+  return /* @__PURE__ */ React.createElement("svg", { className: "todo-mono-9q8-plus-icon", viewBox: "0 0 24 24", "aria-hidden": "true" }, /* @__PURE__ */ React.createElement(
+    "path",
+    {
+      d: "M12 5v14M5 12h14",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "2.1",
+      strokeLinecap: "round"
+    }
+  ));
+}
+function TodoMono9q8TaskRow({
+  todoMono9q8Task,
+  todoMono9q8IsExiting,
+  todoMono9q8OnToggle,
+  todoMono9q8OnDelete,
+  todoMono9q8OnRename
+}) {
+  const [todoMono9q8IsEditing, setTodoMono9q8IsEditing] = useState(false);
+  const [todoMono9q8DraftText, setTodoMono9q8DraftText] = useState(todoMono9q8Task.text);
+  const todoMono9q8EditInputRef = useRef(null);
+  const todoMono9q8CheckboxId = `todo-mono-9q8-checkbox-${todoMono9q8Task.id}`;
+  useEffect(() => {
+    if (todoMono9q8IsEditing && todoMono9q8EditInputRef.current) {
+      todoMono9q8EditInputRef.current.focus();
+      todoMono9q8EditInputRef.current.select();
+    }
+  }, [todoMono9q8IsEditing]);
+  useEffect(() => {
+    if (!todoMono9q8IsEditing) {
+      setTodoMono9q8DraftText(todoMono9q8Task.text);
+    }
+  }, [todoMono9q8Task.text, todoMono9q8IsEditing]);
+  const todoMono9q8StartEdit = useCallback((todoMono9q8Event) => {
+    todoMono9q8Event.stopPropagation();
+    setTodoMono9q8DraftText(todoMono9q8Task.text);
+    setTodoMono9q8IsEditing(true);
+  }, [todoMono9q8Task.text]);
+  const todoMono9q8SaveEdit = useCallback(() => {
+    const todoMono9q8NextText = todoMono9q8DraftText.trim();
+    setTodoMono9q8IsEditing(false);
+    if (!todoMono9q8NextText) {
+      todoMono9q8OnDelete(todoMono9q8Task.id);
+      return;
+    }
+    if (todoMono9q8NextText !== todoMono9q8Task.text) {
+      todoMono9q8OnRename(todoMono9q8Task.id, todoMono9q8NextText);
+    }
+  }, [todoMono9q8DraftText, todoMono9q8OnDelete, todoMono9q8OnRename, todoMono9q8Task.id, todoMono9q8Task.text]);
+  const todoMono9q8CancelEdit = useCallback(() => {
+    setTodoMono9q8DraftText(todoMono9q8Task.text);
+    setTodoMono9q8IsEditing(false);
+  }, [todoMono9q8Task.text]);
+  const todoMono9q8HandleEditKeyDown = useCallback((todoMono9q8Event) => {
+    if (todoMono9q8Event.key === "Enter") {
+      todoMono9q8Event.preventDefault();
+      todoMono9q8SaveEdit();
+    }
+    if (todoMono9q8Event.key === "Escape") {
+      todoMono9q8Event.preventDefault();
+      todoMono9q8CancelEdit();
+    }
+  }, [todoMono9q8CancelEdit, todoMono9q8SaveEdit]);
+  const todoMono9q8HandleTextKeyDown = useCallback((todoMono9q8Event) => {
+    if (todoMono9q8Event.key === "Enter") {
+      todoMono9q8StartEdit(todoMono9q8Event);
+    }
+  }, [todoMono9q8StartEdit]);
+  return /* @__PURE__ */ React.createElement(
+    "li",
+    {
+      className: "todo-mono-9q8-task-item",
+      "data-exiting": todoMono9q8IsExiting ? "true" : "false"
+    },
+    /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        className: "todo-mono-9q8-row",
+        "data-completed": todoMono9q8Task.completed ? "true" : "false",
+        onClick: () => {
+          if (!todoMono9q8IsEditing) {
+            todoMono9q8OnToggle(todoMono9q8Task.id);
+          }
+        }
+      },
+      /* @__PURE__ */ React.createElement(
+        "input",
+        {
+          id: todoMono9q8CheckboxId,
+          className: "todo-mono-9q8-checkbox",
+          type: "checkbox",
+          checked: todoMono9q8Task.completed,
+          onClick: (todoMono9q8Event) => todoMono9q8Event.stopPropagation(),
+          onChange: () => todoMono9q8OnToggle(todoMono9q8Task.id)
+        }
+      ),
+      /* @__PURE__ */ React.createElement("label", { className: "todo-mono-9q8-hidden-label", htmlFor: todoMono9q8CheckboxId }, todoMono9q8Task.completed ? "Mark incomplete:" : "Mark complete:", " ", todoMono9q8Task.text),
+      todoMono9q8IsEditing ? /* @__PURE__ */ React.createElement(
+        "input",
+        {
+          ref: todoMono9q8EditInputRef,
+          className: "todo-mono-9q8-edit-input",
+          value: todoMono9q8DraftText,
+          "aria-label": `Edit ${todoMono9q8Task.text}`,
+          onClick: (todoMono9q8Event) => todoMono9q8Event.stopPropagation(),
+          onChange: (todoMono9q8Event) => setTodoMono9q8DraftText(todoMono9q8Event.target.value),
+          onKeyDown: todoMono9q8HandleEditKeyDown,
+          onBlur: todoMono9q8SaveEdit
+        }
+      ) : /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          type: "button",
+          className: "todo-mono-9q8-text-button",
+          "aria-label": `Edit task: ${todoMono9q8Task.text}`,
+          title: "Double-click to edit",
+          onDoubleClick: todoMono9q8StartEdit,
+          onKeyDown: todoMono9q8HandleTextKeyDown
+        },
+        /* @__PURE__ */ React.createElement("span", { className: "todo-mono-9q8-task-text" }, todoMono9q8Task.text)
+      ),
+      /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          type: "button",
+          className: "todo-mono-9q8-delete-button",
+          "aria-label": `Delete task: ${todoMono9q8Task.text}`,
+          onClick: (todoMono9q8Event) => {
+            todoMono9q8Event.stopPropagation();
+            todoMono9q8OnDelete(todoMono9q8Task.id);
+          }
+        },
+        /* @__PURE__ */ React.createElement("span", { className: "todo-mono-9q8-delete-icon", "aria-hidden": "true" }, "\xD7")
+      )
+    )
+  );
+}
+function TodoMono9q8App() {
+  const [todoMono9q8Tasks, setTodoMono9q8Tasks] = useState(todoMono9q8LoadTasks);
+  const [todoMono9q8NewText, setTodoMono9q8NewText] = useState("");
+  const [todoMono9q8ExitingIds, setTodoMono9q8ExitingIds] = useState(() => /* @__PURE__ */ new Set());
+  const [todoMono9q8ThemeChoice, setTodoMono9q8ThemeChoice] = useState(todoMono9q8LoadThemeChoice);
+  const [todoMono9q8SystemTheme, setTodoMono9q8SystemTheme] = useState(todoMono9q8GetSystemTheme);
+  const [todoMono9q8AuthUser, setTodoMono9q8AuthUser] = useState(null);
+  const [todoMono9q8AuthLoading, setTodoMono9q8AuthLoading] = useState(true);
+  const todoMono9q8InputRef = useRef(null);
+  const todoMono9q8SkipSaveRef = useRef(false);
+  const todoMono9q8TasksRef = useRef(todoMono9q8Tasks);
+  const todoMono9q8Quote = useMemo(() => {
+    const todoMono9q8Index = Math.floor(Math.random() * todoMono9q8Quotes.length);
+    return todoMono9q8Quotes[todoMono9q8Index];
+  }, []);
+  const todoMono9q8ResolvedTheme = todoMono9q8ThemeChoice === "system" ? todoMono9q8SystemTheme : todoMono9q8ThemeChoice;
+  const todoMono9q8RemainingCount = useMemo(() => todoMono9q8Tasks.filter((todoMono9q8Task) => !todoMono9q8Task.completed).length, [todoMono9q8Tasks]);
+  const todoMono9q8HasCompletedTasks = useMemo(() => todoMono9q8Tasks.some((todoMono9q8Task) => todoMono9q8Task.completed), [todoMono9q8Tasks]);
+  const todoMono9q8AuthName = useMemo(() => {
+    if (!todoMono9q8AuthUser) return "";
+    return todoMono9q8AuthUser.name || todoMono9q8AuthUser.displayName || todoMono9q8AuthUser.email || "Signed in";
+  }, [todoMono9q8AuthUser]);
+  useEffect(() => {
+    let todoMono9q8IsMounted = true;
+    let todoMono9q8Unsubscribe = null;
+    todoMono9q8GetKlarUserClient().then(async (todoMono9q8UserClient) => {
+      if (!todoMono9q8IsMounted) return;
+      if (typeof todoMono9q8UserClient.onChange === "function") {
+        todoMono9q8Unsubscribe = todoMono9q8UserClient.onChange((todoMono9q8NextUser) => {
+          if (!todoMono9q8IsMounted) return;
+          setTodoMono9q8AuthUser(todoMono9q8NextUser || null);
+          setTodoMono9q8AuthLoading(false);
+        });
+      }
+      const todoMono9q8CurrentUser = await todoMono9q8UserClient.getUser();
+      if (!todoMono9q8IsMounted) return;
+      setTodoMono9q8AuthUser(todoMono9q8CurrentUser || null);
+      setTodoMono9q8AuthLoading(false);
+    }).catch((todoMono9q8Error) => {
+      console.warn("Could not initialize login.", todoMono9q8Error);
+      if (todoMono9q8IsMounted) {
+        setTodoMono9q8AuthLoading(false);
+      }
+    });
+    return () => {
+      todoMono9q8IsMounted = false;
+      if (typeof todoMono9q8Unsubscribe === "function") {
+        todoMono9q8Unsubscribe();
+      }
     };
-
-    let todoMono9q8KlarUserClientPromise = null;
-
-    function todoMono9q8GetKlarUserClient() {
-      if (!todoMono9q8KlarUserClientPromise) {
-        todoMono9q8KlarUserClientPromise = import("https://editor.klar.website/sdk/v1/users.js")
-          .then(({ createKlarUser }) => createKlarUser({ projectId: 474 }));
-      }
-
-      return todoMono9q8KlarUserClientPromise;
-    }
-
-    const todoMono9q8SeedTasks = [
-      { id: "todo-mono-9q8-seed-1", text: "This is an example of task #1", completed: true },
-      { id: "todo-mono-9q8-seed-2", text: "This is an example of task #2", completed: false },
-      { id: "todo-mono-9q8-seed-3", text: "This is an example of task #3", completed: true },
-      { id: "todo-mono-9q8-seed-4", text: "This is an example of task #4", completed: false },
-      { id: "todo-mono-9q8-seed-5", text: "This is an example of task #5", completed: false }
-    ];
-
-    const todoMono9q8Quotes = [
-      "\"Doing what you love is the cornerstone of having abundance in your life.\" - Wayne Dyer",
-      "\"The secret of getting ahead is getting started.\" - Mark Twain",
-      "\"Simplicity boils down to two steps: identify the essential, eliminate the rest.\" - Leo Babauta",
-      "\"Great things are done by a series of small things brought together.\" - Vincent van Gogh",
-      "\"Focus on being productive instead of busy.\" - Tim Ferriss"
-    ];
-
-    function todoMono9q8CreateId() {
-      if (window.crypto && typeof window.crypto.randomUUID === "function") {
-        return `todo-mono-9q8-${window.crypto.randomUUID()}`;
-      }
-
-      return `todo-mono-9q8-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-    }
-
-    function todoMono9q8LoadTasks() {
-      try {
-        const todoMono9q8RawTasks = window.localStorage.getItem(todoMono9q8StorageKeys.tasks);
-
-        if (todoMono9q8RawTasks === null) {
-          return todoMono9q8SeedTasks;
+  }, []);
+  useEffect(() => {
+    todoMono9q8TasksRef.current = todoMono9q8Tasks;
+  }, [todoMono9q8Tasks]);
+  useEffect(() => {
+    if (todoMono9q8AuthLoading) return;
+    todoMono9q8SkipSaveRef.current = true;
+    if (todoMono9q8AuthUser) {
+      todoMono9q8GetKlarUserClient().then(async (todoMono9q8UserClient) => {
+        const todoMono9q8DbTasks = await todoMono9q8UserClient.data.get("tasks");
+        if (Array.isArray(todoMono9q8DbTasks)) {
+          todoMono9q8SkipSaveRef.current = true;
+          setTodoMono9q8Tasks(
+            todoMono9q8DbTasks.filter((todoMono9q8Task) => todoMono9q8Task && typeof todoMono9q8Task.id === "string" && typeof todoMono9q8Task.text === "string").map((todoMono9q8Task) => ({
+              id: todoMono9q8Task.id,
+              text: todoMono9q8Task.text,
+              completed: Boolean(todoMono9q8Task.completed)
+            }))
+          );
+        } else {
+          await todoMono9q8UserClient.data.set(
+            "tasks",
+            todoMono9q8TasksRef.current.map((todoMono9q8Task) => ({
+              id: todoMono9q8Task.id,
+              text: todoMono9q8Task.text,
+              completed: todoMono9q8Task.completed
+            }))
+          );
         }
-
-        const todoMono9q8ParsedTasks = JSON.parse(todoMono9q8RawTasks);
-
-        if (!Array.isArray(todoMono9q8ParsedTasks)) {
-          return todoMono9q8SeedTasks;
-        }
-
-        return todoMono9q8ParsedTasks
-          .filter((todoMono9q8Task) => (
-            todoMono9q8Task &&
-            typeof todoMono9q8Task.id === "string" &&
-            typeof todoMono9q8Task.text === "string"
-          ))
-          .map((todoMono9q8Task) => ({
-            id: todoMono9q8Task.id,
-            text: todoMono9q8Task.text,
-            completed: Boolean(todoMono9q8Task.completed)
-          }));
-      } catch (todoMono9q8Error) {
-        return todoMono9q8SeedTasks;
-      }
+      }).catch((todoMono9q8Error) => {
+        console.warn("Could not load tasks from DB.", todoMono9q8Error);
+      });
+    } else {
+      setTodoMono9q8Tasks(todoMono9q8LoadTasks());
     }
-
-    function todoMono9q8LoadThemeChoice() {
+  }, [todoMono9q8AuthUser, todoMono9q8AuthLoading]);
+  useEffect(() => {
+    if (todoMono9q8SkipSaveRef.current) {
+      todoMono9q8SkipSaveRef.current = false;
+      return;
+    }
+    const todoMono9q8SerializedTasks = todoMono9q8Tasks.map((todoMono9q8Task) => ({
+      id: todoMono9q8Task.id,
+      text: todoMono9q8Task.text,
+      completed: todoMono9q8Task.completed
+    }));
+    if (todoMono9q8AuthUser) {
+      todoMono9q8GetKlarUserClient().then((todoMono9q8UserClient) => todoMono9q8UserClient.data.set("tasks", todoMono9q8SerializedTasks)).catch((todoMono9q8Error) => {
+        console.warn("Could not save tasks to DB.", todoMono9q8Error);
+      });
+    } else {
       try {
-        const todoMono9q8StoredChoice = window.localStorage.getItem(todoMono9q8StorageKeys.themeChoice);
-        return todoMono9q8StoredChoice === "light" || todoMono9q8StoredChoice === "dark"
-          ? todoMono9q8StoredChoice
-          : "system";
+        window.localStorage.setItem(
+          todoMono9q8StorageKeys.tasks,
+          JSON.stringify(todoMono9q8SerializedTasks)
+        );
       } catch (todoMono9q8Error) {
-        return "system";
+        console.warn("Could not save tasks.", todoMono9q8Error);
       }
     }
-
-    function todoMono9q8GetSystemTheme() {
-      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+  }, [todoMono9q8Tasks, todoMono9q8AuthUser]);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", todoMono9q8ResolvedTheme);
+    document.documentElement.style.colorScheme = todoMono9q8ResolvedTheme;
+  }, [todoMono9q8ResolvedTheme]);
+  useEffect(() => {
+    if (!window.matchMedia) return void 0;
+    const todoMono9q8MediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const todoMono9q8HandleMediaChange = (todoMono9q8Event) => {
+      setTodoMono9q8SystemTheme(todoMono9q8Event.matches ? "dark" : "light");
+    };
+    if (typeof todoMono9q8MediaQuery.addEventListener === "function") {
+      todoMono9q8MediaQuery.addEventListener("change", todoMono9q8HandleMediaChange);
+      return () => todoMono9q8MediaQuery.removeEventListener("change", todoMono9q8HandleMediaChange);
     }
-
-    function TodoMono9q8SunIcon() {
-      return (
-        <svg className="todo-mono-9q8-theme-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M12 4.6V2.4M12 21.6v-2.2M4.6 12H2.4M21.6 12h-2.2M6.76 6.76 5.2 5.2M18.8 18.8l-1.56-1.56M17.24 6.76 18.8 5.2M5.2 18.8l1.56-1.56"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.9"
-            strokeLinecap="round"
-          />
-          <circle
-            cx="12"
-            cy="12"
-            r="4.2"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.9"
-          />
-        </svg>
-      );
+    todoMono9q8MediaQuery.addListener(todoMono9q8HandleMediaChange);
+    return () => todoMono9q8MediaQuery.removeListener(todoMono9q8HandleMediaChange);
+  }, []);
+  const todoMono9q8AddTask = useCallback(() => {
+    const todoMono9q8TrimmedText = todoMono9q8NewText.trim();
+    if (!todoMono9q8TrimmedText) {
+      if (todoMono9q8InputRef.current) {
+        todoMono9q8InputRef.current.focus();
+      }
+      return;
     }
-
-    function TodoMono9q8MoonIcon() {
-      return (
-        <svg className="todo-mono-9q8-theme-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M20.35 14.28A7.83 7.83 0 0 1 9.72 3.65a8.56 8.56 0 1 0 10.63 10.63Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.9"
-            strokeLinejoin="round"
-          />
-        </svg>
-      );
+    setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => [
+      {
+        id: todoMono9q8CreateId(),
+        text: todoMono9q8TrimmedText,
+        completed: false
+      },
+      ...todoMono9q8CurrentTasks
+    ]);
+    setTodoMono9q8NewText("");
+    window.requestAnimationFrame(() => {
+      if (todoMono9q8InputRef.current) {
+        todoMono9q8InputRef.current.focus();
+      }
+    });
+  }, [todoMono9q8NewText]);
+  const todoMono9q8ToggleTask = useCallback((todoMono9q8TaskId) => {
+    setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => todoMono9q8CurrentTasks.map((todoMono9q8Task) => todoMono9q8Task.id === todoMono9q8TaskId ? { ...todoMono9q8Task, completed: !todoMono9q8Task.completed } : todoMono9q8Task));
+  }, []);
+  const todoMono9q8RenameTask = useCallback((todoMono9q8TaskId, todoMono9q8NextText) => {
+    setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => todoMono9q8CurrentTasks.map((todoMono9q8Task) => todoMono9q8Task.id === todoMono9q8TaskId ? { ...todoMono9q8Task, text: todoMono9q8NextText } : todoMono9q8Task));
+  }, []);
+  const todoMono9q8DeleteTask = useCallback((todoMono9q8TaskId) => {
+    setTodoMono9q8ExitingIds((todoMono9q8CurrentIds) => {
+      const todoMono9q8NextIds = new Set(todoMono9q8CurrentIds);
+      todoMono9q8NextIds.add(todoMono9q8TaskId);
+      return todoMono9q8NextIds;
+    });
+    window.setTimeout(() => {
+      setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => todoMono9q8CurrentTasks.filter((todoMono9q8Task) => todoMono9q8Task.id !== todoMono9q8TaskId));
+      setTodoMono9q8ExitingIds((todoMono9q8CurrentIds) => {
+        const todoMono9q8NextIds = new Set(todoMono9q8CurrentIds);
+        todoMono9q8NextIds.delete(todoMono9q8TaskId);
+        return todoMono9q8NextIds;
+      });
+    }, 170);
+  }, []);
+  const todoMono9q8ClearCompleted = useCallback(() => {
+    const todoMono9q8CompletedIds = todoMono9q8Tasks.filter((todoMono9q8Task) => todoMono9q8Task.completed).map((todoMono9q8Task) => todoMono9q8Task.id);
+    if (!todoMono9q8CompletedIds.length) return;
+    setTodoMono9q8ExitingIds((todoMono9q8CurrentIds) => {
+      const todoMono9q8NextIds = new Set(todoMono9q8CurrentIds);
+      todoMono9q8CompletedIds.forEach((todoMono9q8TaskId) => todoMono9q8NextIds.add(todoMono9q8TaskId));
+      return todoMono9q8NextIds;
+    });
+    window.setTimeout(() => {
+      setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => todoMono9q8CurrentTasks.filter((todoMono9q8Task) => !todoMono9q8Task.completed));
+      setTodoMono9q8ExitingIds(/* @__PURE__ */ new Set());
+    }, 170);
+  }, [todoMono9q8Tasks]);
+  const todoMono9q8SwitchTheme = useCallback(() => {
+    const todoMono9q8NextTheme = todoMono9q8ResolvedTheme === "dark" ? "light" : "dark";
+    setTodoMono9q8ThemeChoice(todoMono9q8NextTheme);
+    try {
+      window.localStorage.setItem(todoMono9q8StorageKeys.themeChoice, todoMono9q8NextTheme);
+    } catch (todoMono9q8Error) {
+      console.warn("Could not save theme choice.", todoMono9q8Error);
     }
-
-    function TodoMono9q8PlusIcon() {
-      return (
-        <svg className="todo-mono-9q8-plus-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M12 5v14M5 12h14"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.1"
-            strokeLinecap="round"
-          />
-        </svg>
-      );
+  }, [todoMono9q8ResolvedTheme]);
+  const todoMono9q8SignIn = useCallback(async () => {
+    setTodoMono9q8AuthLoading(true);
+    try {
+      const todoMono9q8UserClient = await todoMono9q8GetKlarUserClient();
+      const todoMono9q8NextUser = await todoMono9q8UserClient.signIn();
+      const todoMono9q8CurrentUser = todoMono9q8NextUser || await todoMono9q8UserClient.getUser();
+      setTodoMono9q8AuthUser(todoMono9q8CurrentUser || null);
+    } catch (todoMono9q8Error) {
+      console.warn("Could not sign in.", todoMono9q8Error);
+    } finally {
+      setTodoMono9q8AuthLoading(false);
     }
-
-    function TodoMono9q8TaskRow({
+  }, []);
+  const todoMono9q8SignOut = useCallback(async () => {
+    setTodoMono9q8AuthLoading(true);
+    try {
+      const todoMono9q8UserClient = await todoMono9q8GetKlarUserClient();
+      await todoMono9q8UserClient.signOut();
+      setTodoMono9q8AuthUser(null);
+    } catch (todoMono9q8Error) {
+      console.warn("Could not sign out.", todoMono9q8Error);
+    } finally {
+      setTodoMono9q8AuthLoading(false);
+    }
+  }, []);
+  const todoMono9q8HandleFormSubmit = useCallback((todoMono9q8Event) => {
+    todoMono9q8Event.preventDefault();
+    todoMono9q8AddTask();
+  }, [todoMono9q8AddTask]);
+  return /* @__PURE__ */ React.createElement("main", { className: "todo-mono-9q8-shell" }, /* @__PURE__ */ React.createElement("section", { className: "todo-mono-9q8-card", "aria-labelledby": "todo-mono-9q8-title" }, /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      type: "button",
+      className: "todo-mono-9q8-theme-toggle",
+      "aria-label": todoMono9q8ResolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+      "aria-pressed": todoMono9q8ResolvedTheme === "dark",
+      onClick: todoMono9q8SwitchTheme
+    },
+    todoMono9q8ResolvedTheme === "dark" ? /* @__PURE__ */ React.createElement(TodoMono9q8SunIcon, null) : /* @__PURE__ */ React.createElement(TodoMono9q8MoonIcon, null)
+  ), /* @__PURE__ */ React.createElement("div", { className: "todo-mono-9q8-panel" }, /* @__PURE__ */ React.createElement("div", { className: "todo-mono-9q8-topbar" }, /* @__PURE__ */ React.createElement("h1", { id: "todo-mono-9q8-title", className: "todo-mono-9q8-heading" }, "Your To Do"), /* @__PURE__ */ React.createElement("div", { className: "todo-mono-9q8-auth-area" }, todoMono9q8AuthUser ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(
+    "span",
+    {
+      className: "todo-mono-9q8-auth-name",
+      title: todoMono9q8AuthUser.email || todoMono9q8AuthName
+    },
+    todoMono9q8AuthName
+  ), /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      type: "button",
+      className: "todo-mono-9q8-auth-button",
+      disabled: todoMono9q8AuthLoading,
+      onClick: todoMono9q8SignOut
+    },
+    "Sign out"
+  )) : /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      type: "button",
+      className: "todo-mono-9q8-auth-button",
+      disabled: todoMono9q8AuthLoading,
+      onClick: todoMono9q8SignIn
+    },
+    todoMono9q8AuthLoading ? "Checking\u2026" : "Sign in"
+  ))), /* @__PURE__ */ React.createElement("form", { className: "todo-mono-9q8-entry-form", onSubmit: todoMono9q8HandleFormSubmit }, /* @__PURE__ */ React.createElement(
+    "input",
+    {
+      ref: todoMono9q8InputRef,
+      className: "todo-mono-9q8-new-input",
+      type: "text",
+      value: todoMono9q8NewText,
+      placeholder: "Add new task",
+      "aria-label": "Add new task",
+      autoComplete: "off",
+      onChange: (todoMono9q8Event) => setTodoMono9q8NewText(todoMono9q8Event.target.value)
+    }
+  ), /* @__PURE__ */ React.createElement("button", { type: "submit", className: "todo-mono-9q8-add-button", "aria-label": "Add task" }, /* @__PURE__ */ React.createElement(TodoMono9q8PlusIcon, null))), todoMono9q8Tasks.length > 0 ? /* @__PURE__ */ React.createElement("ul", { className: "todo-mono-9q8-list", "aria-label": "To-do list" }, todoMono9q8Tasks.map((todoMono9q8Task) => /* @__PURE__ */ React.createElement(
+    TodoMono9q8TaskRow,
+    {
+      key: todoMono9q8Task.id,
       todoMono9q8Task,
-      todoMono9q8IsExiting,
-      todoMono9q8OnToggle,
-      todoMono9q8OnDelete,
-      todoMono9q8OnRename
-    }) {
-      const [todoMono9q8IsEditing, setTodoMono9q8IsEditing] = useState(false);
-      const [todoMono9q8DraftText, setTodoMono9q8DraftText] = useState(todoMono9q8Task.text);
-      const todoMono9q8EditInputRef = useRef(null);
-      const todoMono9q8CheckboxId = `todo-mono-9q8-checkbox-${todoMono9q8Task.id}`;
-
-      useEffect(() => {
-        if (todoMono9q8IsEditing && todoMono9q8EditInputRef.current) {
-          todoMono9q8EditInputRef.current.focus();
-          todoMono9q8EditInputRef.current.select();
-        }
-      }, [todoMono9q8IsEditing]);
-
-      useEffect(() => {
-        if (!todoMono9q8IsEditing) {
-          setTodoMono9q8DraftText(todoMono9q8Task.text);
-        }
-      }, [todoMono9q8Task.text, todoMono9q8IsEditing]);
-
-      const todoMono9q8StartEdit = useCallback((todoMono9q8Event) => {
-        todoMono9q8Event.stopPropagation();
-        setTodoMono9q8DraftText(todoMono9q8Task.text);
-        setTodoMono9q8IsEditing(true);
-      }, [todoMono9q8Task.text]);
-
-      const todoMono9q8SaveEdit = useCallback(() => {
-        const todoMono9q8NextText = todoMono9q8DraftText.trim();
-        setTodoMono9q8IsEditing(false);
-
-        if (!todoMono9q8NextText) {
-          todoMono9q8OnDelete(todoMono9q8Task.id);
-          return;
-        }
-
-        if (todoMono9q8NextText !== todoMono9q8Task.text) {
-          todoMono9q8OnRename(todoMono9q8Task.id, todoMono9q8NextText);
-        }
-      }, [todoMono9q8DraftText, todoMono9q8OnDelete, todoMono9q8OnRename, todoMono9q8Task.id, todoMono9q8Task.text]);
-
-      const todoMono9q8CancelEdit = useCallback(() => {
-        setTodoMono9q8DraftText(todoMono9q8Task.text);
-        setTodoMono9q8IsEditing(false);
-      }, [todoMono9q8Task.text]);
-
-      const todoMono9q8HandleEditKeyDown = useCallback((todoMono9q8Event) => {
-        if (todoMono9q8Event.key === "Enter") {
-          todoMono9q8Event.preventDefault();
-          todoMono9q8SaveEdit();
-        }
-
-        if (todoMono9q8Event.key === "Escape") {
-          todoMono9q8Event.preventDefault();
-          todoMono9q8CancelEdit();
-        }
-      }, [todoMono9q8CancelEdit, todoMono9q8SaveEdit]);
-
-      const todoMono9q8HandleTextKeyDown = useCallback((todoMono9q8Event) => {
-        if (todoMono9q8Event.key === "Enter") {
-          todoMono9q8StartEdit(todoMono9q8Event);
-        }
-      }, [todoMono9q8StartEdit]);
-
-      return (
-        <li
-          className="todo-mono-9q8-task-item"
-          data-exiting={todoMono9q8IsExiting ? "true" : "false"}
-        >
-          <div
-            className="todo-mono-9q8-row"
-            data-completed={todoMono9q8Task.completed ? "true" : "false"}
-            onClick={() => {
-              if (!todoMono9q8IsEditing) {
-                todoMono9q8OnToggle(todoMono9q8Task.id);
-              }
-            }}
-          >
-            <input
-              id={todoMono9q8CheckboxId}
-              className="todo-mono-9q8-checkbox"
-              type="checkbox"
-              checked={todoMono9q8Task.completed}
-              onClick={(todoMono9q8Event) => todoMono9q8Event.stopPropagation()}
-              onChange={() => todoMono9q8OnToggle(todoMono9q8Task.id)}
-            />
-            <label className="todo-mono-9q8-hidden-label" htmlFor={todoMono9q8CheckboxId}>
-              {todoMono9q8Task.completed ? "Mark incomplete:" : "Mark complete:"} {todoMono9q8Task.text}
-            </label>
-
-            {todoMono9q8IsEditing ? (
-              <input
-                ref={todoMono9q8EditInputRef}
-                className="todo-mono-9q8-edit-input"
-                value={todoMono9q8DraftText}
-                aria-label={`Edit ${todoMono9q8Task.text}`}
-                onClick={(todoMono9q8Event) => todoMono9q8Event.stopPropagation()}
-                onChange={(todoMono9q8Event) => setTodoMono9q8DraftText(todoMono9q8Event.target.value)}
-                onKeyDown={todoMono9q8HandleEditKeyDown}
-                onBlur={todoMono9q8SaveEdit}
-              />
-            ) : (
-              <button
-                type="button"
-                className="todo-mono-9q8-text-button"
-                aria-label={`Edit task: ${todoMono9q8Task.text}`}
-                title="Double-click to edit"
-                onDoubleClick={todoMono9q8StartEdit}
-                onKeyDown={todoMono9q8HandleTextKeyDown}
-              >
-                <span className="todo-mono-9q8-task-text">{todoMono9q8Task.text}</span>
-              </button>
-            )}
-
-            <button
-              type="button"
-              className="todo-mono-9q8-delete-button"
-              aria-label={`Delete task: ${todoMono9q8Task.text}`}
-              onClick={(todoMono9q8Event) => {
-                todoMono9q8Event.stopPropagation();
-                todoMono9q8OnDelete(todoMono9q8Task.id);
-              }}
-            >
-              <span className="todo-mono-9q8-delete-icon" aria-hidden="true">×</span>
-            </button>
-          </div>
-        </li>
-      );
+      todoMono9q8IsExiting: todoMono9q8ExitingIds.has(todoMono9q8Task.id),
+      todoMono9q8OnToggle: todoMono9q8ToggleTask,
+      todoMono9q8OnDelete: todoMono9q8DeleteTask,
+      todoMono9q8OnRename: todoMono9q8RenameTask
     }
-
-    function TodoMono9q8App() {
-      const [todoMono9q8Tasks, setTodoMono9q8Tasks] = useState(todoMono9q8LoadTasks);
-      const [todoMono9q8NewText, setTodoMono9q8NewText] = useState("");
-      const [todoMono9q8ExitingIds, setTodoMono9q8ExitingIds] = useState(() => new Set());
-      const [todoMono9q8ThemeChoice, setTodoMono9q8ThemeChoice] = useState(todoMono9q8LoadThemeChoice);
-      const [todoMono9q8SystemTheme, setTodoMono9q8SystemTheme] = useState(todoMono9q8GetSystemTheme);
-      const [todoMono9q8AuthUser, setTodoMono9q8AuthUser] = useState(null);
-      const [todoMono9q8AuthLoading, setTodoMono9q8AuthLoading] = useState(true);
-      const todoMono9q8InputRef = useRef(null);
-      const todoMono9q8SkipSaveRef = useRef(false);
-      const todoMono9q8TasksRef = useRef(todoMono9q8Tasks);
-
-      const todoMono9q8Quote = useMemo(() => {
-        const todoMono9q8Index = Math.floor(Math.random() * todoMono9q8Quotes.length);
-        return todoMono9q8Quotes[todoMono9q8Index];
-      }, []);
-
-      const todoMono9q8ResolvedTheme = todoMono9q8ThemeChoice === "system"
-        ? todoMono9q8SystemTheme
-        : todoMono9q8ThemeChoice;
-
-      const todoMono9q8RemainingCount = useMemo(() => (
-        todoMono9q8Tasks.filter((todoMono9q8Task) => !todoMono9q8Task.completed).length
-      ), [todoMono9q8Tasks]);
-
-      const todoMono9q8HasCompletedTasks = useMemo(() => (
-        todoMono9q8Tasks.some((todoMono9q8Task) => todoMono9q8Task.completed)
-      ), [todoMono9q8Tasks]);
-
-      const todoMono9q8AuthName = useMemo(() => {
-        if (!todoMono9q8AuthUser) return "";
-        return todoMono9q8AuthUser.name ||
-          todoMono9q8AuthUser.displayName ||
-          todoMono9q8AuthUser.email ||
-          "Signed in";
-      }, [todoMono9q8AuthUser]);
-
-      useEffect(() => {
-        let todoMono9q8IsMounted = true;
-        let todoMono9q8Unsubscribe = null;
-
-        todoMono9q8GetKlarUserClient()
-          .then(async (todoMono9q8UserClient) => {
-            if (!todoMono9q8IsMounted) return;
-
-            if (typeof todoMono9q8UserClient.onChange === "function") {
-              todoMono9q8Unsubscribe = todoMono9q8UserClient.onChange((todoMono9q8NextUser) => {
-                if (!todoMono9q8IsMounted) return;
-                setTodoMono9q8AuthUser(todoMono9q8NextUser || null);
-                setTodoMono9q8AuthLoading(false);
-              });
-            }
-
-            const todoMono9q8CurrentUser = await todoMono9q8UserClient.getUser();
-            if (!todoMono9q8IsMounted) return;
-            setTodoMono9q8AuthUser(todoMono9q8CurrentUser || null);
-            setTodoMono9q8AuthLoading(false);
-          })
-          .catch((todoMono9q8Error) => {
-            console.warn("Could not initialize login.", todoMono9q8Error);
-            if (todoMono9q8IsMounted) {
-              setTodoMono9q8AuthLoading(false);
-            }
-          });
-
-        return () => {
-          todoMono9q8IsMounted = false;
-          if (typeof todoMono9q8Unsubscribe === "function") {
-            todoMono9q8Unsubscribe();
-          }
-        };
-      }, []);
-
-      useEffect(() => {
-        todoMono9q8TasksRef.current = todoMono9q8Tasks;
-      }, [todoMono9q8Tasks]);
-
-      useEffect(() => {
-        if (todoMono9q8AuthLoading) return;
-
-        todoMono9q8SkipSaveRef.current = true;
-
-        if (todoMono9q8AuthUser) {
-          todoMono9q8GetKlarUserClient()
-            .then(async (todoMono9q8UserClient) => {
-              const todoMono9q8DbTasks = await todoMono9q8UserClient.data.get("tasks");
-
-              if (Array.isArray(todoMono9q8DbTasks)) {
-                todoMono9q8SkipSaveRef.current = true;
-                setTodoMono9q8Tasks(
-                  todoMono9q8DbTasks
-                    .filter((todoMono9q8Task) => (
-                      todoMono9q8Task &&
-                      typeof todoMono9q8Task.id === "string" &&
-                      typeof todoMono9q8Task.text === "string"
-                    ))
-                    .map((todoMono9q8Task) => ({
-                      id: todoMono9q8Task.id,
-                      text: todoMono9q8Task.text,
-                      completed: Boolean(todoMono9q8Task.completed)
-                    }))
-                );
-              } else {
-                await todoMono9q8UserClient.data.set(
-                  "tasks",
-                  todoMono9q8TasksRef.current.map((todoMono9q8Task) => ({
-                    id: todoMono9q8Task.id,
-                    text: todoMono9q8Task.text,
-                    completed: todoMono9q8Task.completed
-                  }))
-                );
-              }
-            })
-            .catch((todoMono9q8Error) => {
-              console.warn("Could not load tasks from DB.", todoMono9q8Error);
-            });
-        } else {
-          setTodoMono9q8Tasks(todoMono9q8LoadTasks());
-        }
-      }, [todoMono9q8AuthUser, todoMono9q8AuthLoading]);
-
-      useEffect(() => {
-        if (todoMono9q8SkipSaveRef.current) {
-          todoMono9q8SkipSaveRef.current = false;
-          return;
-        }
-
-        const todoMono9q8SerializedTasks = todoMono9q8Tasks.map((todoMono9q8Task) => ({
-          id: todoMono9q8Task.id,
-          text: todoMono9q8Task.text,
-          completed: todoMono9q8Task.completed
-        }));
-
-        if (todoMono9q8AuthUser) {
-          todoMono9q8GetKlarUserClient()
-            .then((todoMono9q8UserClient) => (
-              todoMono9q8UserClient.data.set("tasks", todoMono9q8SerializedTasks)
-            ))
-            .catch((todoMono9q8Error) => {
-              console.warn("Could not save tasks to DB.", todoMono9q8Error);
-            });
-        } else {
-          try {
-            window.localStorage.setItem(
-              todoMono9q8StorageKeys.tasks,
-              JSON.stringify(todoMono9q8SerializedTasks)
-            );
-          } catch (todoMono9q8Error) {
-            console.warn("Could not save tasks.", todoMono9q8Error);
-          }
-        }
-      }, [todoMono9q8Tasks, todoMono9q8AuthUser]);
-
-      useEffect(() => {
-        document.documentElement.setAttribute("data-theme", todoMono9q8ResolvedTheme);
-        document.documentElement.style.colorScheme = todoMono9q8ResolvedTheme;
-      }, [todoMono9q8ResolvedTheme]);
-
-      useEffect(() => {
-        if (!window.matchMedia) return undefined;
-
-        const todoMono9q8MediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        const todoMono9q8HandleMediaChange = (todoMono9q8Event) => {
-          setTodoMono9q8SystemTheme(todoMono9q8Event.matches ? "dark" : "light");
-        };
-
-        if (typeof todoMono9q8MediaQuery.addEventListener === "function") {
-          todoMono9q8MediaQuery.addEventListener("change", todoMono9q8HandleMediaChange);
-          return () => todoMono9q8MediaQuery.removeEventListener("change", todoMono9q8HandleMediaChange);
-        }
-
-        todoMono9q8MediaQuery.addListener(todoMono9q8HandleMediaChange);
-        return () => todoMono9q8MediaQuery.removeListener(todoMono9q8HandleMediaChange);
-      }, []);
-
-      const todoMono9q8AddTask = useCallback(() => {
-        const todoMono9q8TrimmedText = todoMono9q8NewText.trim();
-
-        if (!todoMono9q8TrimmedText) {
-          if (todoMono9q8InputRef.current) {
-            todoMono9q8InputRef.current.focus();
-          }
-          return;
-        }
-
-        setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => [
-          {
-            id: todoMono9q8CreateId(),
-            text: todoMono9q8TrimmedText,
-            completed: false
-          },
-          ...todoMono9q8CurrentTasks
-        ]);
-
-        setTodoMono9q8NewText("");
-
-        window.requestAnimationFrame(() => {
-          if (todoMono9q8InputRef.current) {
-            todoMono9q8InputRef.current.focus();
-          }
-        });
-      }, [todoMono9q8NewText]);
-
-      const todoMono9q8ToggleTask = useCallback((todoMono9q8TaskId) => {
-        setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => (
-          todoMono9q8CurrentTasks.map((todoMono9q8Task) => (
-            todoMono9q8Task.id === todoMono9q8TaskId
-              ? { ...todoMono9q8Task, completed: !todoMono9q8Task.completed }
-              : todoMono9q8Task
-          ))
-        ));
-      }, []);
-
-      const todoMono9q8RenameTask = useCallback((todoMono9q8TaskId, todoMono9q8NextText) => {
-        setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => (
-          todoMono9q8CurrentTasks.map((todoMono9q8Task) => (
-            todoMono9q8Task.id === todoMono9q8TaskId
-              ? { ...todoMono9q8Task, text: todoMono9q8NextText }
-              : todoMono9q8Task
-          ))
-        ));
-      }, []);
-
-      const todoMono9q8DeleteTask = useCallback((todoMono9q8TaskId) => {
-        setTodoMono9q8ExitingIds((todoMono9q8CurrentIds) => {
-          const todoMono9q8NextIds = new Set(todoMono9q8CurrentIds);
-          todoMono9q8NextIds.add(todoMono9q8TaskId);
-          return todoMono9q8NextIds;
-        });
-
-        window.setTimeout(() => {
-          setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => (
-            todoMono9q8CurrentTasks.filter((todoMono9q8Task) => todoMono9q8Task.id !== todoMono9q8TaskId)
-          ));
-
-          setTodoMono9q8ExitingIds((todoMono9q8CurrentIds) => {
-            const todoMono9q8NextIds = new Set(todoMono9q8CurrentIds);
-            todoMono9q8NextIds.delete(todoMono9q8TaskId);
-            return todoMono9q8NextIds;
-          });
-        }, 170);
-      }, []);
-
-      const todoMono9q8ClearCompleted = useCallback(() => {
-        const todoMono9q8CompletedIds = todoMono9q8Tasks
-          .filter((todoMono9q8Task) => todoMono9q8Task.completed)
-          .map((todoMono9q8Task) => todoMono9q8Task.id);
-
-        if (!todoMono9q8CompletedIds.length) return;
-
-        setTodoMono9q8ExitingIds((todoMono9q8CurrentIds) => {
-          const todoMono9q8NextIds = new Set(todoMono9q8CurrentIds);
-          todoMono9q8CompletedIds.forEach((todoMono9q8TaskId) => todoMono9q8NextIds.add(todoMono9q8TaskId));
-          return todoMono9q8NextIds;
-        });
-
-        window.setTimeout(() => {
-          setTodoMono9q8Tasks((todoMono9q8CurrentTasks) => (
-            todoMono9q8CurrentTasks.filter((todoMono9q8Task) => !todoMono9q8Task.completed)
-          ));
-
-          setTodoMono9q8ExitingIds(new Set());
-        }, 170);
-      }, [todoMono9q8Tasks]);
-
-      const todoMono9q8SwitchTheme = useCallback(() => {
-        const todoMono9q8NextTheme = todoMono9q8ResolvedTheme === "dark" ? "light" : "dark";
-        setTodoMono9q8ThemeChoice(todoMono9q8NextTheme);
-
-        try {
-          window.localStorage.setItem(todoMono9q8StorageKeys.themeChoice, todoMono9q8NextTheme);
-        } catch (todoMono9q8Error) {
-          console.warn("Could not save theme choice.", todoMono9q8Error);
-        }
-      }, [todoMono9q8ResolvedTheme]);
-
-      const todoMono9q8SignIn = useCallback(async () => {
-        setTodoMono9q8AuthLoading(true);
-
-        try {
-          const todoMono9q8UserClient = await todoMono9q8GetKlarUserClient();
-          const todoMono9q8NextUser = await todoMono9q8UserClient.signIn();
-          const todoMono9q8CurrentUser = todoMono9q8NextUser || await todoMono9q8UserClient.getUser();
-          setTodoMono9q8AuthUser(todoMono9q8CurrentUser || null);
-        } catch (todoMono9q8Error) {
-          console.warn("Could not sign in.", todoMono9q8Error);
-        } finally {
-          setTodoMono9q8AuthLoading(false);
-        }
-      }, []);
-
-      const todoMono9q8SignOut = useCallback(async () => {
-        setTodoMono9q8AuthLoading(true);
-
-        try {
-          const todoMono9q8UserClient = await todoMono9q8GetKlarUserClient();
-          await todoMono9q8UserClient.signOut();
-          setTodoMono9q8AuthUser(null);
-        } catch (todoMono9q8Error) {
-          console.warn("Could not sign out.", todoMono9q8Error);
-        } finally {
-          setTodoMono9q8AuthLoading(false);
-        }
-      }, []);
-
-      const todoMono9q8HandleFormSubmit = useCallback((todoMono9q8Event) => {
-        todoMono9q8Event.preventDefault();
-        todoMono9q8AddTask();
-      }, [todoMono9q8AddTask]);
-
-      return (
-        <main className="todo-mono-9q8-shell">
-          <section className="todo-mono-9q8-card" aria-labelledby="todo-mono-9q8-title">
-            <button
-              type="button"
-              className="todo-mono-9q8-theme-toggle"
-              aria-label={todoMono9q8ResolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              aria-pressed={todoMono9q8ResolvedTheme === "dark"}
-              onClick={todoMono9q8SwitchTheme}
-            >
-              {todoMono9q8ResolvedTheme === "dark" ? <TodoMono9q8SunIcon /> : <TodoMono9q8MoonIcon />}
-            </button>
-
-            <div className="todo-mono-9q8-panel">
-              <div className="todo-mono-9q8-topbar">
-                <h1 id="todo-mono-9q8-title" className="todo-mono-9q8-heading">Your To Do</h1>
-
-                <div className="todo-mono-9q8-auth-area">
-                  {todoMono9q8AuthUser ? (
-                    <React.Fragment>
-                      <span
-                        className="todo-mono-9q8-auth-name"
-                        title={todoMono9q8AuthUser.email || todoMono9q8AuthName}
-                      >
-                        {todoMono9q8AuthName}
-                      </span>
-                      <button
-                        type="button"
-                        className="todo-mono-9q8-auth-button"
-                        disabled={todoMono9q8AuthLoading}
-                        onClick={todoMono9q8SignOut}
-                      >
-                        Sign out
-                      </button>
-                    </React.Fragment>
-                  ) : (
-                    <button
-                      type="button"
-                      className="todo-mono-9q8-auth-button"
-                      disabled={todoMono9q8AuthLoading}
-                      onClick={todoMono9q8SignIn}
-                    >
-                      {todoMono9q8AuthLoading ? "Checking…" : "Sign in"}
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              <form className="todo-mono-9q8-entry-form" onSubmit={todoMono9q8HandleFormSubmit}>
-                <input
-                  ref={todoMono9q8InputRef}
-                  className="todo-mono-9q8-new-input"
-                  type="text"
-                  value={todoMono9q8NewText}
-                  placeholder="Add new task"
-                  aria-label="Add new task"
-                  autoComplete="off"
-                  onChange={(todoMono9q8Event) => setTodoMono9q8NewText(todoMono9q8Event.target.value)}
-                />
-                <button type="submit" className="todo-mono-9q8-add-button" aria-label="Add task">
-                  <TodoMono9q8PlusIcon />
-                </button>
-              </form>
-
-              {todoMono9q8Tasks.length > 0 ? (
-                <ul className="todo-mono-9q8-list" aria-label="To-do list">
-                  {todoMono9q8Tasks.map((todoMono9q8Task) => (
-                    <TodoMono9q8TaskRow
-                      key={todoMono9q8Task.id}
-                      todoMono9q8Task={todoMono9q8Task}
-                      todoMono9q8IsExiting={todoMono9q8ExitingIds.has(todoMono9q8Task.id)}
-                      todoMono9q8OnToggle={todoMono9q8ToggleTask}
-                      todoMono9q8OnDelete={todoMono9q8DeleteTask}
-                      todoMono9q8OnRename={todoMono9q8RenameTask}
-                    />
-                  ))}
-                </ul>
-              ) : (
-                <div className="todo-mono-9q8-empty-state" role="status">
-                  Nothing to do 🎉<br />
-                  Add your first task above.
-                </div>
-              )}
-
-              <footer className="todo-mono-9q8-footer-area">
-                <div className="todo-mono-9q8-summary-line">
-                  <p className="todo-mono-9q8-remaining" aria-live="polite" aria-atomic="true">
-                    Your remaining todos : {todoMono9q8RemainingCount}
-                  </p>
-
-                  {todoMono9q8HasCompletedTasks && (
-                    <button
-                      type="button"
-                      className="todo-mono-9q8-clear-button"
-                      onClick={todoMono9q8ClearCompleted}
-                    >
-                      Clear completed
-                    </button>
-                  )}
-                </div>
-
-                <p className="todo-mono-9q8-quote">{todoMono9q8Quote}</p>
-              </footer>
-            </div>
-          </section>
-        </main>
-      );
-    }
-
-    ReactDOM.createRoot(document.getElementById("todo-mono-9q8-root")).render(<TodoMono9q8App />);
-  </script>
-  </body>
-</html>
+  ))) : /* @__PURE__ */ React.createElement("div", { className: "todo-mono-9q8-empty-state", role: "status" }, "Nothing to do \u{1F389}", /* @__PURE__ */ React.createElement("br", null), "Add your first task above."), /* @__PURE__ */ React.createElement("footer", { className: "todo-mono-9q8-footer-area" }, /* @__PURE__ */ React.createElement("div", { className: "todo-mono-9q8-summary-line" }, /* @__PURE__ */ React.createElement("p", { className: "todo-mono-9q8-remaining", "aria-live": "polite", "aria-atomic": "true" }, "Your remaining todos : ", todoMono9q8RemainingCount), todoMono9q8HasCompletedTasks && /* @__PURE__ */ React.createElement(
+    "button",
+    {
+      type: "button",
+      className: "todo-mono-9q8-clear-button",
+      onClick: todoMono9q8ClearCompleted
+    },
+    "Clear completed"
+  )), /* @__PURE__ */ React.createElement("p", { className: "todo-mono-9q8-quote" }, todoMono9q8Quote)))));
+}
+ReactDOM.createRoot(document.getElementById("todo-mono-9q8-root")).render(/* @__PURE__ */ React.createElement(TodoMono9q8App, null));
+</script>
+  
+</body></html>
