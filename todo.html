@@ -800,7 +800,7 @@
 
     function todoMono9q8GetKlarUserClient() {
       if (!todoMono9q8KlarUserClientPromise) {
-        todoMono9q8KlarUserClientPromise = import("https://editor.klar.website/sdk/v1/users.js")
+        todoMono9q8KlarUserClientPromise = import("http://localhost:5173/sdk/v1/users.js")
           .then(({ createKlarUser }) => createKlarUser({ projectId: 474 }));
       }
 
