@@ -794,17 +794,16 @@
       // (it derives the API base from that URL). When unavailable, every field
       // falls back to its hard-coded default.
       const KLAR_SDK_URL = "http://localhost:5173/sdk/content.js"; // ← your Klar host
+      // Native dynamic import via Function so the in-browser Babel transform
+      // doesn't rewrite import() into require() (which isn't defined here).
+      const klarImport = new Function("u", "return import(u)");
       let klarPromise = null;
       function getKlar() {
         if (klarPromise) return klarPromise;
         const pid = window.__KLAR_PROJECT_ID__ || 474;
-        console.log("[klar] projectId =", pid, "sdk =", KLAR_SDK_URL);
         if (!pid) return (klarPromise = Promise.resolve(null));
-        klarPromise = import(KLAR_SDK_URL)
-          .then((m) => {
-            console.log("[klar] SDK loaded, creating client");
-            return m.createKlarClient({ projectId: pid });
-          })
+        klarPromise = klarImport(KLAR_SDK_URL)
+          .then((m) => m.createKlarClient({ projectId: pid }))
           .catch((e) => {
             console.log("[klar] SDK import FAILED:", e);
             return null;
