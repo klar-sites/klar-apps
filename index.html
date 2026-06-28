@@ -12,14 +12,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Inter:wght@400;500;600&amp;display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
 
-    <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin=""></script>
-    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin=""></script>
-    <script src="https://unpkg.com/history@4.10.1/umd/history.min.js" crossorigin=""></script>
-    <script src="https://unpkg.com/react-router@5.3.4/umd/react-router.min.js" crossorigin=""></script>
-    <script src="https://unpkg.com/react-router-dom@5.3.4/umd/react-router-dom.min.js" crossorigin=""></script>
-    <script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js" crossorigin=""></script>
+    <script
+      src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"
+      crossorigin=""
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
+      crossorigin=""
+    ></script>
+    <script
+      src="https://unpkg.com/history@4.10.1/umd/history.min.js"
+      crossorigin=""
+    ></script>
+    <script
+      src="https://unpkg.com/react-router@5.3.4/umd/react-router.min.js"
+      crossorigin=""
+    ></script>
+    <script
+      src="https://unpkg.com/react-router-dom@5.3.4/umd/react-router-dom.min.js"
+      crossorigin=""
+    ></script>
+    <script
+      src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"
+      crossorigin=""
+    ></script>
 
     <style>
       :root {
@@ -778,11 +797,18 @@
       let klarPromise = null;
       function getKlar() {
         if (klarPromise) return klarPromise;
-        const pid = window.__KLAR_PROJECT_ID__;
+        const pid = window.__KLAR_PROJECT_ID__ || 474;
+        console.log("[klar] projectId =", pid, "sdk =", KLAR_SDK_URL);
         if (!pid) return (klarPromise = Promise.resolve(null));
         klarPromise = import(KLAR_SDK_URL)
-          .then((m) => m.createKlarClient({ projectId: pid }))
-          .catch(() => null);
+          .then((m) => {
+            console.log("[klar] SDK loaded, creating client");
+            return m.createKlarClient({ projectId: pid });
+          })
+          .catch((e) => {
+            console.log("[klar] SDK import FAILED:", e);
+            return null;
+          });
         return klarPromise;
       }
       // Load one route's content ("/" -> "index.html", "/om-oss" -> "om-oss.html").
@@ -795,16 +821,14 @@
             klar
               .page(file)
               .then((c) => {
-                console.log('dafg',c)
                 if (alive && c) setContent(c);
               })
-              .catch((e) => {console.log(e)});
+              .catch(() => {});
           });
           return () => {
             alive = false;
           };
         }, [file]);
-        console.log('sadf',content)
         return content;
       }
       // type:array (layout:list/blocks) saves [{tag, html, text}] — re-inject the
