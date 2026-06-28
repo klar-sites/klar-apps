@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vårdkliniken Norden — Din hälsa i fokus</title>
+
+    <!-- Klar writes this file to the repo; it sets window.__KLAR_PROJECT_ID__. -->
+    <script src="/klar-project.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Inter:wght@400;500;600&amp;display=swap"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
 
     <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin=""></script>
     <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin=""></script>
@@ -37,7 +39,7 @@
       }
 
       body {
-        font-family: 'Inter', system-ui, sans-serif;
+        font-family: "Inter", system-ui, sans-serif;
         background: var(--vkn-bg);
         color: var(--vkn-ink);
         line-height: 1.6;
@@ -92,13 +94,13 @@
         display: grid;
         place-items: center;
         color: #fff;
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: 22px;
         font-weight: 600;
       }
 
       .vkn-logo__text {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: 20px;
         font-weight: 600;
         letter-spacing: -0.01em;
@@ -106,7 +108,7 @@
 
       .vkn-logo__text span {
         display: block;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         font-size: 11px;
         font-weight: 500;
         color: var(--vkn-muted);
@@ -127,7 +129,7 @@
         font-size: 15px;
         padding: 8px 14px;
         border-radius: 8px;
-        transition: all .18s;
+        transition: all 0.18s;
       }
 
       .vkn-nav__link:hover {
@@ -167,7 +169,7 @@
         background: var(--vkn-ink);
         margin: 4px 0;
         border-radius: 2px;
-        transition: .2s;
+        transition: 0.2s;
       }
 
       /* MAIN */
@@ -201,7 +203,7 @@
       }
 
       .vkn-hero h1 {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: clamp(2.4rem, 5vw, 3.6rem);
         line-height: 1.08;
         font-weight: 600;
@@ -247,7 +249,7 @@
         padding: 13px 24px;
         border-radius: 999px;
         border: 1px solid transparent;
-        transition: all .18s;
+        transition: all 0.18s;
       }
 
       .vkn-btn--primary {
@@ -292,7 +294,7 @@
       }
 
       .vkn-strip__card h3 {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: 19px;
         margin-bottom: 8px;
       }
@@ -327,7 +329,7 @@
       }
 
       .vkn-section__head h2 {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: clamp(1.9rem, 3.5vw, 2.6rem);
         line-height: 1.12;
         font-weight: 600;
@@ -354,7 +356,9 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        transition: transform .2s, box-shadow .2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
       }
 
       .vkn-treat-card:hover {
@@ -383,7 +387,7 @@
       }
 
       .vkn-treat-card__body h3 {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: 20px;
       }
 
@@ -428,7 +432,7 @@
       }
 
       .vkn-about-grid h2 {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: clamp(1.9rem, 3.5vw, 2.5rem);
         margin-bottom: 16px;
         letter-spacing: -0.015em;
@@ -456,7 +460,7 @@
       }
 
       .vkn-stat__num {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: 34px;
         color: var(--vkn-primary);
         font-weight: 600;
@@ -493,7 +497,7 @@
       }
 
       .vkn-member__body h4 {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: 18px;
       }
 
@@ -599,7 +603,7 @@
       }
 
       .vkn-cta-banner h2 {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: clamp(1.8rem, 3.5vw, 2.4rem);
         margin-bottom: 14px;
       }
@@ -628,7 +632,7 @@
       }
 
       .vkn-page-head h1 {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         font-size: clamp(2rem, 4vw, 3rem);
         letter-spacing: -0.02em;
       }
@@ -690,7 +694,7 @@
       }
 
       .vkn-footer__logo {
-        font-family: 'Fraunces', serif;
+        font-family: "Fraunces", serif;
         color: #fff;
         font-size: 20px;
         margin-bottom: 12px;
@@ -748,353 +752,694 @@
     <div id="vkn-root"></div>
 
     <script type="text/babel" data-presets="env,react">
-      const { BrowserRouter, MemoryRouter, Switch, Route, NavLink, Link, useLocation, Redirect } = ReactRouterDOM;
-    const { useState, useEffect } = React;
+      const {
+        BrowserRouter,
+        MemoryRouter,
+        Switch,
+        Route,
+        NavLink,
+        Link,
+        useLocation,
+        Redirect,
+      } = ReactRouterDOM;
+      const { useState, useEffect } = React;
 
-    const Router = window.__KLAR_CDN ? MemoryRouter : BrowserRouter;
+      const Router = window.__KLAR_CDN ? MemoryRouter : BrowserRouter;
 
-    const TREATMENTS = [
-      { id: 'halsoundersokning', title: 'Hälsoundersökning', img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80', alt: 'Läkare som undersöker en patient', desc: 'Grundlig genomgång av din hälsa med blodprov, EKG och personlig rådgivning.', price: 'Från 1 290 kr', time: '60 min' },
-      { id: 'hudvard', title: 'Medicinsk hudvård', img: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=1600&q=80', alt: 'Hudvårdsbehandling på klinik', desc: 'Skonsamma behandlingar mot akne, pigmentering och åldrande hud.', price: 'Från 950 kr', time: '45 min' },
-      { id: 'fysioterapi', title: 'Fysioterapi', img: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1600&q=80', alt: 'Fysioterapeut behandlar patient', desc: 'Rehabilitering och smärtlindring vid besvär i rygg, nacke och leder.', price: 'Från 750 kr', time: '50 min' },
-      { id: 'vaccination', title: 'Vaccinationer', img: 'https://images.unsplash.com/photo-1632053002928-1919a190e0fb?auto=format&fit=crop&w=1600&q=80', alt: 'Vaccination på vårdmottagning', desc: 'Rese- och säsongsvaccinationer av legitimerad sjuksköterska.', price: 'Från 450 kr', time: '20 min' },
-      { id: 'naringsradgivning', title: 'Näringsrådgivning', img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1600&q=80', alt: 'Hälsosam mat och grönsaker', desc: 'Individuell kostplan för att nå dina hälso- och viktmål.', price: 'Från 690 kr', time: '40 min' },
-      { id: 'samtalsterapi', title: 'Samtalsterapi', img: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1600&q=80', alt: 'Samtal mellan terapeut och klient', desc: 'Stöd vid stress, oro och nedstämdhet med legitimerad psykolog.', price: 'Från 1 100 kr', time: '50 min' },
-    ];
+      // --- Klar content -------------------------------------------------------
+      // Read saved :field values from pages.content via the Klar SDK. The project
+      // id comes from /klar-project.js (window.__KLAR_PROJECT_ID__), which Klar
+      // always writes to the repo. The SDK is imported by URL from your Klar host
+      // (it derives the API base from that URL). When unavailable, every field
+      // falls back to its hard-coded default.
+      const KLAR_SDK_URL = "http://localhost:5173/sdk/content.js"; // ← your Klar host
+      let klarPromise = null;
+      function getKlar() {
+        if (klarPromise) return klarPromise;
+        const pid = window.__KLAR_PROJECT_ID__;
+        if (!pid) return (klarPromise = Promise.resolve(null));
+        klarPromise = import(KLAR_SDK_URL)
+          .then((m) => m.createKlarClient({ projectId: pid }))
+          .catch(() => null);
+        return klarPromise;
+      }
+      // Load one route's content ("/" -> "index.html", "/om-oss" -> "om-oss.html").
+      function usePage(file) {
+        const [content, setContent] = useState({});
+        useEffect(() => {
+          let alive = true;
+          getKlar().then((klar) => {
+            if (!klar) return;
+            klar
+              .page(file)
+              .then((c) => {
+                if (alive && c) setContent(c);
+              })
+              .catch(() => {});
+          });
+          return () => {
+            alive = false;
+          };
+        }, [file]);
+        return content;
+      }
+      // type:array (layout:list/blocks) saves [{tag, html, text}] — re-inject the
+      // saved item HTML into the container; fall back to the hard-coded children.
+      function Rich({ className, items, children }) {
+        if (Array.isArray(items) && items.length) {
+          return (
+            <div
+              className={className}
+              dangerouslySetInnerHTML={{
+                __html: items.map((i) => (i && i.html) || "").join(""),
+              }}
+            />
+          );
+        }
+        return <div className={className}>{children}</div>;
+      }
 
-    const TEAM = [
-      { name: 'Dr. Anna Lindqvist', role: 'Specialistläkare', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80', alt: 'Porträtt av kvinnlig läkare', bio: 'Specialist i allmänmedicin med 15 års erfarenhet.' },
-      { name: 'Erik Sandberg', role: 'Leg. Fysioterapeut', img: 'https://images.unsplash.com/photo-1612531385446-f7e6d131e1d0?auto=format&fit=crop&w=800&q=80', alt: 'Porträtt av manlig fysioterapeut', bio: 'Inriktad på idrottsskador och rehabilitering.' },
-      { name: 'Sofia Nyberg', role: 'Leg. Psykolog', img: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=800&q=80', alt: 'Porträtt av kvinnlig psykolog', bio: 'Arbetar med KBT och stresshantering.' },
-    ];
+      const TREATMENTS = [
+        {
+          id: "halsoundersokning",
+          title: "Hälsoundersökning",
+          img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
+          alt: "Läkare som undersöker en patient",
+          desc: "Grundlig genomgång av din hälsa med blodprov, EKG och personlig rådgivning.",
+          price: "Från 1 290 kr",
+          time: "60 min",
+        },
+        {
+          id: "hudvard",
+          title: "Medicinsk hudvård",
+          img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=1600&q=80",
+          alt: "Hudvårdsbehandling på klinik",
+          desc: "Skonsamma behandlingar mot akne, pigmentering och åldrande hud.",
+          price: "Från 950 kr",
+          time: "45 min",
+        },
+        {
+          id: "fysioterapi",
+          title: "Fysioterapi",
+          img: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1600&q=80",
+          alt: "Fysioterapeut behandlar patient",
+          desc: "Rehabilitering och smärtlindring vid besvär i rygg, nacke och leder.",
+          price: "Från 750 kr",
+          time: "50 min",
+        },
+        {
+          id: "vaccination",
+          title: "Vaccinationer",
+          img: "https://images.unsplash.com/photo-1632053002928-1919a190e0fb?auto=format&fit=crop&w=1600&q=80",
+          alt: "Vaccination på vårdmottagning",
+          desc: "Rese- och säsongsvaccinationer av legitimerad sjuksköterska.",
+          price: "Från 450 kr",
+          time: "20 min",
+        },
+        {
+          id: "naringsradgivning",
+          title: "Näringsrådgivning",
+          img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1600&q=80",
+          alt: "Hälsosam mat och grönsaker",
+          desc: "Individuell kostplan för att nå dina hälso- och viktmål.",
+          price: "Från 690 kr",
+          time: "40 min",
+        },
+        {
+          id: "samtalsterapi",
+          title: "Samtalsterapi",
+          img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1600&q=80",
+          alt: "Samtal mellan terapeut och klient",
+          desc: "Stöd vid stress, oro och nedstämdhet med legitimerad psykolog.",
+          price: "Från 1 100 kr",
+          time: "50 min",
+        },
+      ];
 
-    function ScrollTop() {
-      const { pathname } = useLocation();
-      useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
-      return null;
-    }
+      const TEAM = [
+        {
+          name: "Dr. Anna Lindqvist",
+          role: "Specialistläkare",
+          img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80",
+          alt: "Porträtt av kvinnlig läkare",
+          bio: "Specialist i allmänmedicin med 15 års erfarenhet.",
+        },
+        {
+          name: "Erik Sandberg",
+          role: "Leg. Fysioterapeut",
+          img: "https://images.unsplash.com/photo-1612531385446-f7e6d131e1d0?auto=format&fit=crop&w=800&q=80",
+          alt: "Porträtt av manlig fysioterapeut",
+          bio: "Inriktad på idrottsskador och rehabilitering.",
+        },
+        {
+          name: "Sofia Nyberg",
+          role: "Leg. Psykolog",
+          img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=800&q=80",
+          alt: "Porträtt av kvinnlig psykolog",
+          bio: "Arbetar med KBT och stresshantering.",
+        },
+      ];
 
-    function Header() {
-      const [open, setOpen] = useState(false);
-      const close = () => setOpen(false);
-      return (
-        <header className="vkn-header">
-          <div className="vkn-header__inner" style={{ position: 'relative' }}>
-            <Link to="/" className="vkn-logo" onClick={close}>
-              <span className="vkn-logo__mark">V</span>
-              <span className="vkn-logo__text">Vårdkliniken Norden<span>Hälsa &amp; Omtanke</span></span>
-            </Link>
-            <button className="vkn-burger" aria-label="Meny" onClick={() => setOpen(o => !o)}>
-              <span></span><span></span><span></span>
-            </button>
-            <nav className={'vkn-nav' + (open ? ' vkn-open' : '')}>
-              <NavLink to="/" exact className="vkn-nav__link" activeClassName="vkn-active" onClick={close}>Hem</NavLink>
-              <NavLink to="/behandlingar" className="vkn-nav__link" activeClassName="vkn-active" onClick={close}>Behandlingar</NavLink>
-              <NavLink to="/om-oss" className="vkn-nav__link" activeClassName="vkn-active" onClick={close}>Om oss</NavLink>
-              <NavLink to="/kontakt" className="vkn-nav__link" activeClassName="vkn-active" onClick={close}>Kontakt</NavLink>
-              <NavLink to="/kontakt" className="vkn-nav__link vkn-nav__cta" onClick={close}>Boka tid</NavLink>
-            </nav>
-          </div>
-        </header>
-      );
-    }
+      function ScrollTop() {
+        const { pathname } = useLocation();
+        useEffect(() => {
+          window.scrollTo(0, 0);
+        }, [pathname]);
+        return null;
+      }
 
-    function Footer() {
-      return (
-        <footer className="vkn-footer">
-          <div className="vkn-container">
-            <div className="vkn-footer__grid">
-              <div>
-                <div className="vkn-footer__logo">Vårdkliniken Norden</div>
-                <p>En modern privatklinik i hjärtat av Stockholm. Vi sätter din hälsa och ditt välmående främst – med kompetens, omtanke och tid för varje patient.</p>
-              </div>
-              <div>
-                <h4>Sidor</h4>
-                <Link to="/">Hem</Link>
-                <Link to="/behandlingar">Behandlingar</Link>
-                <Link to="/om-oss">Om oss</Link>
-                <Link to="/kontakt">Kontakt</Link>
-              </div>
-              <div>
-                <h4>Kontakt</h4>
-                <p>Sturegatan 12, 114 36 Stockholm<br/>08-123 45 67<br/>info@vardklinikennorden.se</p>
-              </div>
+      function Header() {
+        const [open, setOpen] = useState(false);
+        const close = () => setOpen(false);
+        return (
+          <header className="vkn-header">
+            <div className="vkn-header__inner" style={{ position: "relative" }}>
+              <Link to="/" className="vkn-logo" onClick={close}>
+                <span className="vkn-logo__mark">V</span>
+                <span className="vkn-logo__text">
+                  Vårdkliniken Norden<span>Hälsa &amp; Omtanke</span>
+                </span>
+              </Link>
+              <button
+                className="vkn-burger"
+                aria-label="Meny"
+                onClick={() => setOpen((o) => !o)}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+              <nav className={"vkn-nav" + (open ? " vkn-open" : "")}>
+                <NavLink
+                  to="/"
+                  exact
+                  className="vkn-nav__link"
+                  activeClassName="vkn-active"
+                  onClick={close}
+                >
+                  Hem
+                </NavLink>
+                <NavLink
+                  to="/behandlingar"
+                  className="vkn-nav__link"
+                  activeClassName="vkn-active"
+                  onClick={close}
+                >
+                  Behandlingar
+                </NavLink>
+                <NavLink
+                  to="/om-oss"
+                  className="vkn-nav__link"
+                  activeClassName="vkn-active"
+                  onClick={close}
+                >
+                  Om oss
+                </NavLink>
+                <NavLink
+                  to="/kontakt"
+                  className="vkn-nav__link"
+                  activeClassName="vkn-active"
+                  onClick={close}
+                >
+                  Kontakt
+                </NavLink>
+                <NavLink
+                  to="/kontakt"
+                  className="vkn-nav__link vkn-nav__cta"
+                  onClick={close}
+                >
+                  Boka tid
+                </NavLink>
+              </nav>
             </div>
-            <div className="vkn-footer__bottom">
-              <span>© {new Date().getFullYear()} Vårdkliniken Norden. Alla rättigheter förbehållna.</span>
-              <span>Integritetspolicy · Cookies</span>
-            </div>
-          </div>
-        </footer>
-      );
-    }
+          </header>
+        );
+      }
 
-    function Home() {
-      return (
-        <>
-          <section className="vkn-container">
-            <div className="vkn-hero">
-              <div>
-                <span className="vkn-hero__eyebrow">Privatklinik i Stockholm</span>
-                <h1>Din hälsa förtjänar tid och omtanke</h1>
-                <p>Hos Vårdkliniken Norden möts du av erfarna specialister i en lugn miljö. Korta väntetider, personlig vård och behandlingar anpassade efter dig.</p>
-                <div className="vkn-hero__actions">
-                  <Link to="/kontakt" className="vkn-btn vkn-btn--primary">Boka tid →</Link>
-                  <Link to="/behandlingar" className="vkn-btn vkn-btn--ghost">Se behandlingar</Link>
+      function Footer() {
+        return (
+          <footer className="vkn-footer">
+            <div className="vkn-container">
+              <div className="vkn-footer__grid">
+                <div>
+                  <div className="vkn-footer__logo">Vårdkliniken Norden</div>
+                  <p>
+                    En modern privatklinik i hjärtat av Stockholm. Vi sätter din
+                    hälsa och ditt välmående främst – med kompetens, omtanke och
+                    tid för varje patient.
+                  </p>
+                </div>
+                <div>
+                  <h4>Sidor</h4>
+                  <Link to="/">Hem</Link>
+                  <Link to="/behandlingar">Behandlingar</Link>
+                  <Link to="/om-oss">Om oss</Link>
+                  <Link to="/kontakt">Kontakt</Link>
+                </div>
+                <div>
+                  <h4>Kontakt</h4>
+                  <p>
+                    Sturegatan 12, 114 36 Stockholm
+                    <br />
+                    08-123 45 67
+                    <br />
+                    info@vardklinikennorden.se
+                  </p>
                 </div>
               </div>
-              <div className="vkn-hero__img">
-                <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=1600&q=80" alt="Ljus och modern vårdmottagning" />
+              <div className="vkn-footer__bottom">
+                <span>
+                  © {new Date().getFullYear()} Vårdkliniken Norden. Alla
+                  rättigheter förbehållna.
+                </span>
+                <span>Integritetspolicy · Cookies</span>
               </div>
             </div>
-          </section>
+          </footer>
+        );
+      }
 
-          <section className="vkn-container">
-            <div className="vkn-strip">
-              <div className="vkn-strip__card">
-                <div className="vkn-strip__icon">🩺</div>
-                <h3>Erfarna specialister</h3>
-                <p>Legitimerad personal med lång erfarenhet inom sina områden.</p>
+      function Home() {
+        const c = usePage("index.html");
+        return (
+          <>
+            <section className="vkn-container">
+              <div className="vkn-hero">
+                <div>
+                  <span className="vkn-hero__eyebrow">
+                    {c.eyebrow ?? "Privatklinik i Stockholm"}
+                  </span>
+                  <h1>{c.title ?? "Din hälsa förtjänar tid och omtanke"}</h1>
+                  <p>
+                    {c.text ??
+                      "Hos Vårdkliniken Norden möts du av erfarna specialister i en lugn miljö. Korta väntetider, personlig vård och behandlingar anpassade efter dig."}
+                  </p>
+                  <div className="vkn-hero__actions">
+                    <Link
+                      to={c.primaryBtn?.href ?? "/kontakt"}
+                      className="vkn-btn vkn-btn--primary"
+                    >
+                      {c.primaryBtn?.text ?? "Boka tid →"}
+                    </Link>
+                    <Link
+                      to={c.ghostBtn?.href ?? "/behandlingar"}
+                      className="vkn-btn vkn-btn--ghost"
+                    >
+                      {c.ghostBtn?.text ?? "Se behandlingar"}
+                    </Link>
+                  </div>
+                </div>
+                <div className="vkn-hero__img">
+                  <img
+                    src={
+                      c.image?.src ??
+                      "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=1600&q=80"
+                    }
+                    alt={c.image?.alt ?? "Ljus och modern vårdmottagning"}
+                  />
+                </div>
               </div>
-              <div className="vkn-strip__card">
-                <div className="vkn-strip__icon">⏱️</div>
-                <h3>Korta väntetider</h3>
-                <p>Ofta tid samma vecka – ingen lång kö, ingen stress.</p>
+            </section>
+
+            <section className="vkn-container">
+              <Rich className="vkn-strip" items={c.strip}>
+                <div className="vkn-strip__card">
+                  <div className="vkn-strip__icon">🩺</div>
+                  <h3>Erfarna specialister</h3>
+                  <p>
+                    Legitimerad personal med lång erfarenhet inom sina områden.
+                  </p>
+                </div>
+                <div className="vkn-strip__card">
+                  <div className="vkn-strip__icon">⏱️</div>
+                  <h3>Korta väntetider</h3>
+                  <p>Ofta tid samma vecka – ingen lång kö, ingen stress.</p>
+                </div>
+                <div className="vkn-strip__card">
+                  <div className="vkn-strip__icon">💚</div>
+                  <h3>Personlig vård</h3>
+                  <p>Vi tar oss tid att lyssna och ser hela människan.</p>
+                </div>
+              </Rich>
+            </section>
+
+            <section className="vkn-section vkn-section--soft">
+              <div className="vkn-container">
+                <div className="vkn-section__head">
+                  <span className="vkn-section__eyebrow">
+                    Våra behandlingar
+                  </span>
+                  <h2>Vård som möter dina behov</h2>
+                  <p>
+                    Från hälsoundersökningar till fysioterapi – vi erbjuder ett
+                    brett utbud av tjänster under ett och samma tak.
+                  </p>
+                </div>
+                <Rich className="vkn-treatments" items={c.treatments}>
+                  {TREATMENTS.slice(0, 3).map((t) => (
+                    <article key={t.id} className="vkn-treat-card">
+                      <div className="vkn-treat-card__img">
+                        <img src={t.img} alt={t.alt} />
+                      </div>
+                      <div className="vkn-treat-card__body">
+                        <h3>{t.title}</h3>
+                        <p>{t.desc}</p>
+                        <div className="vkn-treat-card__meta">
+                          <span className="vkn-treat-card__price">
+                            {t.price}
+                          </span>
+                          <span className="vkn-treat-card__time">{t.time}</span>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </Rich>
+                <div style={{ marginTop: 32 }}>
+                  <Link to="/behandlingar" className="vkn-btn vkn-btn--ghost">
+                    Visa alla behandlingar →
+                  </Link>
+                </div>
               </div>
-              <div className="vkn-strip__card">
-                <div className="vkn-strip__icon">💚</div>
-                <h3>Personlig vård</h3>
-                <p>Vi tar oss tid att lyssna och ser hela människan.</p>
+            </section>
+
+            <section className="vkn-container">
+              <div className="vkn-cta-banner">
+                <h2>Redo att ta hand om din hälsa?</h2>
+                <p>
+                  Boka en tid idag och ta första steget mot att må bättre. Vi
+                  finns här för dig.
+                </p>
+                <Link to="/kontakt" className="vkn-btn vkn-btn--primary">
+                  Boka tid
+                </Link>
+              </div>
+            </section>
+          </>
+        );
+      }
+
+      function Treatments() {
+        const c = usePage("behandlingar.html");
+        return (
+          <>
+            <div className="vkn-page-head">
+              <div className="vkn-container">
+                <h1>{c.title ?? "Behandlingar"}</h1>
+                <p>
+                  {c.description ??
+                    "Ett brett utbud av medicinska tjänster utförda av legitimerad personal."}
+                </p>
               </div>
             </div>
-          </section>
-
-          <section className="vkn-section vkn-section--soft">
-            <div className="vkn-container">
-              <div className="vkn-section__head">
-                <span className="vkn-section__eyebrow">Våra behandlingar</span>
-                <h2>Vård som möter dina behov</h2>
-                <p>Från hälsoundersökningar till fysioterapi – vi erbjuder ett brett utbud av tjänster under ett och samma tak.</p>
+            <section className="vkn-section">
+              <div className="vkn-container">
+                <Rich className="vkn-treatments" items={c.treatments}>
+                  {TREATMENTS.map((t) => (
+                    <article key={t.id} className="vkn-treat-card">
+                      <div className="vkn-treat-card__img">
+                        <img src={t.img} alt={t.alt} />
+                      </div>
+                      <div className="vkn-treat-card__body">
+                        <h3>{t.title}</h3>
+                        <p>{t.desc}</p>
+                        <div className="vkn-treat-card__meta">
+                          <span className="vkn-treat-card__price">
+                            {t.price}
+                          </span>
+                          <span className="vkn-treat-card__time">{t.time}</span>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </Rich>
               </div>
-              <div className="vkn-treatments">
-                {TREATMENTS.slice(0, 3).map(t => (
-                  <article key={t.id} className="vkn-treat-card">
-                    <div className="vkn-treat-card__img"><img src={t.img} alt={t.alt} /></div>
-                    <div className="vkn-treat-card__body">
-                      <h3>{t.title}</h3>
-                      <p>{t.desc}</p>
-                      <div className="vkn-treat-card__meta">
-                        <span className="vkn-treat-card__price">{t.price}</span>
-                        <span className="vkn-treat-card__time">{t.time}</span>
+            </section>
+            <section className="vkn-container">
+              <div className="vkn-cta-banner">
+                <h2>Osäker på vilken behandling du behöver?</h2>
+                <p>
+                  Kontakta oss så hjälper vi dig att hitta rätt utifrån dina
+                  behov.
+                </p>
+                <Link to="/kontakt" className="vkn-btn vkn-btn--primary">
+                  Kontakta oss
+                </Link>
+              </div>
+            </section>
+          </>
+        );
+      }
+
+      function About() {
+        const c = usePage("om-oss.html");
+        return (
+          <>
+            <div className="vkn-page-head">
+              <div className="vkn-container">
+                <h1>{c.title ?? "Om oss"}</h1>
+                <p>
+                  {c.description ??
+                    "Vi är en privatklinik som tror på vård med tid, kompetens och omtanke."}
+                </p>
+              </div>
+            </div>
+            <section className="vkn-section">
+              <div className="vkn-container">
+                <div className="vkn-about-grid">
+                  <img
+                    src={
+                      c.aboutImage?.src ??
+                      "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=1600&q=80"
+                    }
+                    alt={c.aboutImage?.alt ?? "Vårdpersonal i samtal på kliniken"}
+                  />
+                  <Rich items={c.aboutText}>
+                    <h2>{c.aboutTitle ?? "Vård som sätter dig först"}</h2>
+                    <p>
+                      Vårdkliniken Norden grundades med en enkel övertygelse:
+                      alla förtjänar vård där man känner sig sedd och lyssnad
+                      på. Sedan 2012 har vi hjälpt tusentals patienter med allt
+                      från hälsoundersökningar till rehabilitering.
+                    </p>
+                    <p>
+                      Vårt team av specialister arbetar tvärprofessionellt för
+                      att ge dig en sammanhållen och trygg vårdupplevelse. Vi
+                      tar oss alltid tid att förklara, lyssna och planera
+                      tillsammans med dig.
+                    </p>
+                  </Rich>
+                </div>
+                <div className="vkn-stats">
+                  <div className="vkn-stat">
+                    <div className="vkn-stat__num">12+</div>
+                    <div className="vkn-stat__label">År av erfarenhet</div>
+                  </div>
+                  <div className="vkn-stat">
+                    <div className="vkn-stat__num">15 000+</div>
+                    <div className="vkn-stat__label">Nöjda patienter</div>
+                  </div>
+                  <div className="vkn-stat">
+                    <div className="vkn-stat__num">4,9 ★</div>
+                    <div className="vkn-stat__label">Snittbetyg</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section className="vkn-section vkn-section--soft">
+              <div className="vkn-container">
+                <div className="vkn-section__head">
+                  <span className="vkn-section__eyebrow">Vårt team</span>
+                  <h2>Möt personalen</h2>
+                  <p>
+                    Engagerade och legitimerade yrkespersoner som brinner för
+                    din hälsa.
+                  </p>
+                </div>
+                <Rich className="vkn-team" items={c.team}>
+                  {TEAM.map((m) => (
+                    <div key={m.name} className="vkn-member">
+                      <img src={m.img} alt={m.alt} />
+                      <div className="vkn-member__body">
+                        <h4>{m.name}</h4>
+                        <span>{m.role}</span>
+                        <p>{m.bio}</p>
                       </div>
                     </div>
-                  </article>
-                ))}
+                  ))}
+                </Rich>
               </div>
-              <div style={{ marginTop: 32 }}>
-                <Link to="/behandlingar" className="vkn-btn vkn-btn--ghost">Visa alla behandlingar →</Link>
+            </section>
+          </>
+        );
+      }
+
+      function Contact() {
+        const c = usePage("kontakt.html");
+        const [sent, setSent] = useState(false);
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          setSent(true);
+          e.target.reset();
+        };
+        return (
+          <>
+            <div className="vkn-page-head">
+              <div className="vkn-container">
+                <h1>{c.title ?? "Kontakt & bokning"}</h1>
+                <p>
+                  {c.description ??
+                    "Hör av dig så återkommer vi inom kort. Du kan också boka direkt via formuläret."}
+                </p>
               </div>
             </div>
-          </section>
-
-          <section className="vkn-container">
-            <div className="vkn-cta-banner">
-              <h2>Redo att ta hand om din hälsa?</h2>
-              <p>Boka en tid idag och ta första steget mot att må bättre. Vi finns här för dig.</p>
-              <Link to="/kontakt" className="vkn-btn vkn-btn--primary">Boka tid</Link>
-            </div>
-          </section>
-        </>
-      );
-    }
-
-    function Treatments() {
-      return (
-        <>
-          <div className="vkn-page-head">
-            <div className="vkn-container">
-              <h1>Behandlingar</h1>
-              <p>Ett brett utbud av medicinska tjänster utförda av legitimerad personal.</p>
-            </div>
-          </div>
-          <section className="vkn-section">
-            <div className="vkn-container">
-              <div className="vkn-treatments">
-                {TREATMENTS.map(t => (
-                  <article key={t.id} className="vkn-treat-card">
-                    <div className="vkn-treat-card__img"><img src={t.img} alt={t.alt} /></div>
-                    <div className="vkn-treat-card__body">
-                      <h3>{t.title}</h3>
-                      <p>{t.desc}</p>
-                      <div className="vkn-treat-card__meta">
-                        <span className="vkn-treat-card__price">{t.price}</span>
-                        <span className="vkn-treat-card__time">{t.time}</span>
+            <section className="vkn-section">
+              <div className="vkn-container">
+                <div className="vkn-contact-grid">
+                  <div>
+                    <div className="vkn-info-card">
+                      <div className="vkn-info-card__icon">📍</div>
+                      <div>
+                        <h4>Besöksadress</h4>
+                        <p>
+                          Sturegatan 12
+                          <br />
+                          114 36 Stockholm
+                        </p>
                       </div>
                     </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-          <section className="vkn-container">
-            <div className="vkn-cta-banner">
-              <h2>Osäker på vilken behandling du behöver?</h2>
-              <p>Kontakta oss så hjälper vi dig att hitta rätt utifrån dina behov.</p>
-              <Link to="/kontakt" className="vkn-btn vkn-btn--primary">Kontakta oss</Link>
-            </div>
-          </section>
-        </>
-      );
-    }
-
-    function About() {
-      return (
-        <>
-          <div className="vkn-page-head">
-            <div className="vkn-container">
-              <h1>Om oss</h1>
-              <p>Vi är en privatklinik som tror på vård med tid, kompetens och omtanke.</p>
-            </div>
-          </div>
-          <section className="vkn-section">
-            <div className="vkn-container">
-              <div className="vkn-about-grid">
-                <img src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=1600&q=80" alt="Vårdpersonal i samtal på kliniken" />
-                <div>
-                  <h2>Vård som sätter dig först</h2>
-                  <p>Vårdkliniken Norden grundades med en enkel övertygelse: alla förtjänar vård där man känner sig sedd och lyssnad på. Sedan 2012 har vi hjälpt tusentals patienter med allt från hälsoundersökningar till rehabilitering.</p>
-                  <p>Vårt team av specialister arbetar tvärprofessionellt för att ge dig en sammanhållen och trygg vårdupplevelse. Vi tar oss alltid tid att förklara, lyssna och planera tillsammans med dig.</p>
-                </div>
-              </div>
-              <div className="vkn-stats">
-                <div className="vkn-stat"><div className="vkn-stat__num">12+</div><div className="vkn-stat__label">År av erfarenhet</div></div>
-                <div className="vkn-stat"><div className="vkn-stat__num">15 000+</div><div className="vkn-stat__label">Nöjda patienter</div></div>
-                <div className="vkn-stat"><div className="vkn-stat__num">4,9 ★</div><div className="vkn-stat__label">Snittbetyg</div></div>
-              </div>
-            </div>
-          </section>
-          <section className="vkn-section vkn-section--soft">
-            <div className="vkn-container">
-              <div className="vkn-section__head">
-                <span className="vkn-section__eyebrow">Vårt team</span>
-                <h2>Möt personalen</h2>
-                <p>Engagerade och legitimerade yrkespersoner som brinner för din hälsa.</p>
-              </div>
-              <div className="vkn-team">
-                {TEAM.map(m => (
-                  <div key={m.name} className="vkn-member">
-                    <img src={m.img} alt={m.alt} />
-                    <div className="vkn-member__body">
-                      <h4>{m.name}</h4>
-                      <span>{m.role}</span>
-                      <p>{m.bio}</p>
+                    <div className="vkn-info-card">
+                      <div className="vkn-info-card__icon">📞</div>
+                      <div>
+                        <h4>Telefon</h4>
+                        <p>
+                          08-123 45 67
+                          <br />
+                          Mån–fre 08:00–17:00
+                        </p>
+                      </div>
+                    </div>
+                    <div className="vkn-info-card">
+                      <div className="vkn-info-card__icon">✉️</div>
+                      <div>
+                        <h4>E-post</h4>
+                        <p>info@vardklinikennorden.se</p>
+                      </div>
+                    </div>
+                    <div className="vkn-info-card">
+                      <div className="vkn-info-card__icon">🕐</div>
+                      <div>
+                        <h4>Öppettider</h4>
+                        <p>
+                          Mån–fre: 08:00–18:00
+                          <br />
+                          Lör: 10:00–14:00
+                          <br />
+                          Sön: Stängt
+                        </p>
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </>
-      );
-    }
-
-    function Contact() {
-      const [sent, setSent] = useState(false);
-      const handleSubmit = (e) => { e.preventDefault(); setSent(true); e.target.reset(); };
-      return (
-        <>
-          <div className="vkn-page-head">
-            <div className="vkn-container">
-              <h1>Kontakt &amp; bokning</h1>
-              <p>Hör av dig så återkommer vi inom kort. Du kan också boka direkt via formuläret.</p>
-            </div>
-          </div>
-          <section className="vkn-section">
-            <div className="vkn-container">
-              <div className="vkn-contact-grid">
-                <div>
-                  <div className="vkn-info-card">
-                    <div className="vkn-info-card__icon">📍</div>
-                    <div><h4>Besöksadress</h4><p>Sturegatan 12<br/>114 36 Stockholm</p></div>
-                  </div>
-                  <div className="vkn-info-card">
-                    <div className="vkn-info-card__icon">📞</div>
-                    <div><h4>Telefon</h4><p>08-123 45 67<br/>Mån–fre 08:00–17:00</p></div>
-                  </div>
-                  <div className="vkn-info-card">
-                    <div className="vkn-info-card__icon">✉️</div>
-                    <div><h4>E-post</h4><p>info@vardklinikennorden.se</p></div>
-                  </div>
-                  <div className="vkn-info-card">
-                    <div className="vkn-info-card__icon">🕐</div>
-                    <div><h4>Öppettider</h4><p>Mån–fre: 08:00–18:00<br/>Lör: 10:00–14:00<br/>Sön: Stängt</p></div>
-                  </div>
+                  <form className="vkn-form" onSubmit={handleSubmit}>
+                    <div className="vkn-field">
+                      <label htmlFor="vkn-name">Namn</label>
+                      <input
+                        id="vkn-name"
+                        type="text"
+                        required
+                        placeholder="För- och efternamn"
+                      />
+                    </div>
+                    <div className="vkn-field">
+                      <label htmlFor="vkn-email">E-post</label>
+                      <input
+                        id="vkn-email"
+                        type="email"
+                        required
+                        placeholder="din@epost.se"
+                      />
+                    </div>
+                    <div className="vkn-field">
+                      <label htmlFor="vkn-treat">Behandling</label>
+                      <select id="vkn-treat">
+                        {TREATMENTS.map((t) => (
+                          <option key={t.id}>{t.title}</option>
+                        ))}
+                        <option>Annat / vet ej</option>
+                      </select>
+                    </div>
+                    <div className="vkn-field">
+                      <label htmlFor="vkn-msg">Meddelande</label>
+                      <textarea
+                        id="vkn-msg"
+                        rows="4"
+                        placeholder="Berätta gärna kort vad ditt ärende gäller"
+                      ></textarea>
+                    </div>
+                    <button
+                      type="submit"
+                      className="vkn-btn vkn-btn--primary"
+                      style={{ width: "100%", justifyContent: "center" }}
+                    >
+                      Skicka förfrågan
+                    </button>
+                    {sent && (
+                      <div className="vkn-form__msg">
+                        Tack! Vi har tagit emot din förfrågan och återkommer
+                        inom kort. 💚
+                      </div>
+                    )}
+                  </form>
                 </div>
-                <form className="vkn-form" onSubmit={handleSubmit}>
-                  <div className="vkn-field">
-                    <label htmlFor="vkn-name">Namn</label>
-                    <input id="vkn-name" type="text" required placeholder="För- och efternamn" />
-                  </div>
-                  <div className="vkn-field">
-                    <label htmlFor="vkn-email">E-post</label>
-                    <input id="vkn-email" type="email" required placeholder="din@epost.se" />
-                  </div>
-                  <div className="vkn-field">
-                    <label htmlFor="vkn-treat">Behandling</label>
-                    <select id="vkn-treat">
-                      {TREATMENTS.map(t => <option key={t.id}>{t.title}</option>)}
-                      <option>Annat / vet ej</option>
-                    </select>
-                  </div>
-                  <div className="vkn-field">
-                    <label htmlFor="vkn-msg">Meddelande</label>
-                    <textarea id="vkn-msg" rows="4" placeholder="Berätta gärna kort vad ditt ärende gäller"></textarea>
-                  </div>
-                  <button type="submit" className="vkn-btn vkn-btn--primary" style={{ width: '100%', justifyContent: 'center' }}>Skicka förfrågan</button>
-                  {sent && <div className="vkn-form__msg">Tack! Vi har tagit emot din förfrågan och återkommer inom kort. 💚</div>}
-                </form>
               </div>
+            </section>
+          </>
+        );
+      }
+
+      function NotFound() {
+        return (
+          <section className="vkn-section">
+            <div
+              className="vkn-container"
+              style={{ textAlign: "center", padding: "60px 0" }}
+            >
+              <h1 style={{ fontFamily: "Fraunces, serif", fontSize: "3rem" }}>
+                404
+              </h1>
+              <p style={{ color: "var(--vkn-muted)", margin: "12px 0 24px" }}>
+                Sidan kunde tyvärr inte hittas.
+              </p>
+              <Link to="/" className="vkn-btn vkn-btn--primary">
+                Till startsidan
+              </Link>
             </div>
           </section>
-        </>
-      );
-    }
+        );
+      }
 
-    function NotFound() {
-      return (
-        <section className="vkn-section">
-          <div className="vkn-container" style={{ textAlign: 'center', padding: '60px 0' }}>
-            <h1 style={{ fontFamily: 'Fraunces, serif', fontSize: '3rem' }}>404</h1>
-            <p style={{ color: 'var(--vkn-muted)', margin: '12px 0 24px' }}>Sidan kunde tyvärr inte hittas.</p>
-            <Link to="/" className="vkn-btn vkn-btn--primary">Till startsidan</Link>
-          </div>
-        </section>
-      );
-    }
+      function App() {
+        console.log("hehe");
+        return (
+          <Router basename={window.__KLAR_BASE || undefined}>
+            <ScrollTop />
+            <div className="vkn-app">
+              <Header />
+              <main className="vkn-main">
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/behandlingar" component={Treatments} />
+                  <Route path="/om-oss" component={About} />
+                  <Route path="/kontakt" component={Contact} />
+                  <Route component={NotFound} />
+                </Switch>
+              </main>
+              <Footer />
+            </div>
+          </Router>
+        );
+      }
 
-    function App() {
-      console.log('hehe')
-      return (
-        <Router basename={window.__KLAR_BASE || undefined}>
-          <ScrollTop />
-          <div className="vkn-app">
-            <Header />
-            <main className="vkn-main">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/behandlingar" component={Treatments} />
-                <Route path="/om-oss" component={About} />
-                <Route path="/kontakt" component={Contact} />
-                <Route component={NotFound} />
-              </Switch>
-            </main>
-            <Footer />
-          </div>
-        </Router>
-      );
-    }
-
-    ReactDOM.createRoot(document.getElementById('vkn-root')).render(<App />);
-  </script>
+      ReactDOM.createRoot(document.getElementById("vkn-root")).render(<App />);
+    </script>
   </body>
 </html>
