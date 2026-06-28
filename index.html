@@ -795,9 +795,10 @@
             klar
               .page(file)
               .then((c) => {
+                console.log(c)
                 if (alive && c) setContent(c);
               })
-              .catch(() => {});
+              .catch((e) => {console.log(e)});
           });
           return () => {
             alive = false;
